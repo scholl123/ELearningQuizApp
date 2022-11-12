@@ -1,0 +1,42 @@
+[{
+    "uid": 1,
+    "Machine Learning": [100, 20],
+    "French Vocabulary": [20, 1],
+    "badges": [
+        {
+			"bid": 1, 
+            "count": -1
+        },
+        {
+            "bid": 2, 
+            "count": 58
+        }]
+},
+{
+    "uid": 2,
+    "Machine Learning": [100, 50],
+    "French Vocabulary": [20, 8],
+    "badges": [
+        {
+			"bid": 3, 
+            "count": 500
+        },
+        {
+            "bid": 1, 
+            "count": -1
+        }]
+},
+{
+    "uid": 3,
+    "Machine Learning": [100, 100],
+    "French Vocabulary": [20, 20],
+    "badges": [
+        {
+			"bid": 2, 
+            "count": 100
+        },
+        {
+            "bid": 4, 
+            "count": 8
+        }]
+}]

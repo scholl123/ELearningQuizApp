@@ -1,0 +1,20 @@
+[{
+    "bid": 1,
+    "name": "Finish first Quiz",
+    "target": -1
+},
+{
+    "bid": 2,
+    "name": "More than 100 Questions on Easy",
+    "target": 100
+},
+{
+    "bid": 3,
+    "name": "All Questions of a Topic on Easy",
+    "target": 500
+},
+{
+    "bid": 4,
+    "name": "Less than 10% of Qustions currently on Hard",
+    "target": 10
+}]
