@@ -1,0 +1,257 @@
+[{
+    "qid": 1,
+    "topic": "Machine Learning",
+    "question": "What is the scientific name of a butterfly?",
+    "answers": [
+        "Apis",
+        "Coleoptera",
+        "Formicqidae",
+        "Rhopalocera"
+        ],
+    "correct_index": 3,
+    "difficulty": 0,
+    "answered": [100, 20]
+},
+{
+    "qid": 2,
+    "topic": "Machine Learning",
+    "question": "How hot is the surface of the sun?",
+	"answers": [
+		"1,233 K",
+		"5,778 K",
+		"12,130 K",
+		"101,300 K"
+		],
+	"correct_index": 1,
+    "difficulty": 1,
+    "answered": [135, 2]
+},
+{
+    "qid": 3,
+    "topic": "Machine Learning",
+    "question": "Who are the actors in The Internship?",
+	"answers": [
+		"Ben Stiller, Jonah Hill",
+		"Courteney Cox, Matt LeBlanc",
+		"Kaley Cuoco, Jim Parsons",
+		"Vince Vaughn, Owen Wilson"
+		],
+	"correct_index": 3,
+    "difficulty": 2,
+    "answered": [940, 120]
+},
+{
+    "qid": 4,
+    "topic": "Machine Learning",
+    "question": "What is the capital of Spain?",
+	"answers": [
+		"Berlin",
+		"Buenos Aires",
+		"Madrqid",
+		"San Juan"
+		],
+	"correct_index": 2,
+    "difficulty": 0,
+    "answered": [95, 2]
+},
+{
+    "qid": 5,
+    "topic": "Machine Learning",
+    "question": "What are the school colors of the University of Texas at Austin?",
+	"answers": [
+		"Black, Red",
+		"Blue, Orange",
+		"White, Burnt Orange",
+		"White, Old gold, Gold"
+		],
+	"correct_index": 2,
+    "difficulty": 1,
+    "answered": [1050, 240]
+},
+{
+    "qid": 6,
+    "topic": "Machine Learning",
+    "question": "What is 70 degrees Fahrenheit in Celsius?",
+    "answers": [
+		"18.8889",
+		"20",
+		"21.1111",
+		"158"
+		],
+	"correct_index": 2,
+    "difficulty": 2,
+    "answered": [85, 82]
+},
+{
+    "qid": 7,
+    "topic": "Machine Learning",
+    "question": "What does AI stand for?",
+    "answers": [
+        "artificial intelligence"
+        ],
+    "correct_index": 0,
+    "difficulty": 0,
+    "answered": [654, 420]
+},
+{
+    "qid": 8,
+    "topic": "Machine Learning",
+    "question": "What does GUI stand for?",
+    "answers": [
+        "graphical user interface"
+        ],
+    "correct_index": 3,
+    "difficulty": 1,
+    "answered": [423, 120]
+},
+{
+    "qid": 9,
+    "topic": "Machine Learning",
+    "question": "What does API stand for?",
+    "answers": [
+        "application programming interface"
+        ],
+    "correct_index": 3,
+    "difficulty": 2,
+    "answered": [756, 50]
+},
+{
+    "qid": 10,
+    "topic": "Machine Learning",
+    "question": "In which year was COBOL released?",
+    "answers": [
+        "1959"
+        ],
+    "correct_index": 3,
+    "difficulty": 0,
+    "answered": [846, 99]
+},
+{
+    "qid": 11,
+    "topic": "French Vocabulary",
+    "question": "When was Mahatma Gandhi born?",
+	"answers": [
+		"October 2, 1869",
+		"December 15, 1872",
+		"July 18, 1918",
+		"January 15, 1929"
+		],
+	"correct_index": 0,
+    "difficulty": 1,
+    "answered": [548, 456]
+},
+{
+    "qid": 12,
+    "topic": "French Vocabulary",
+    "question": "How far is the moon from Earth?",
+	"answers": [
+		"7,918 miles (12,742 km)",
+		"86,881 miles (139,822 km)",
+		"238,400 miles (384,400 km)",
+		"35,980,000 miles (57,910,000 km)"
+		],
+	"correct_index": 2,
+    "difficulty": 2,
+    "answered": [10, 7]
+},
+{
+    "qid": 13,
+    "topic": "French Vocabulary",
+    "question": "What is 65 times 52?",
+	"answers": [
+		"117",
+		"3120",
+		"3380",
+		"3520"
+		],
+	"correct_index": 2,
+    "difficulty": 0,
+    "answered": [100, 87]
+},
+{
+    "qid": 14,
+    "topic": "French Vocabulary",
+    "question": "How tall is Mount Everest?",
+	"answers": [
+		"6,683 ft (2,037 m)",
+		"7,918 ft (2,413 m)",
+		"19,341 ft (5,895 m)",
+		"29,029 ft (8,847 m)"
+		],
+	"correct_index": 3,
+    "difficulty": 1,
+    "answered": [45, 20]
+},
+{
+    "qid": 15,
+    "topic": "French Vocabulary",
+    "question": "When dqid The Avengers come out?",
+	"answers": [
+		"May 2, 2008",
+		"May 4, 2012",
+		"May 3, 2013",
+		"April 4, 2014"
+		],
+	"correct_index": 1,
+    "difficulty": 2,
+    "answered": [87, 63]
+},
+{
+    "qid": 16,
+    "topic": "French Vocabulary",
+    "question": "What is 48,879 in hexqidecimal?",
+	"answers": [
+		"0x18C1",
+		"0xBEEF",
+		"0xDEAD",
+		"0x12D591"
+		],
+	"correct_index": 1,
+    "difficulty": 0,
+    "answered": [784, 54]
+},
+{
+    "qid": 17,
+    "topic": "French Vocabulary",
+    "question": "Which queen’s actions contributed to the unrest that led to the French Revolution?",
+    "answers": [
+        "Marie-Antoinette"
+        ],
+    "correct_index": 3,
+    "difficulty": 1,
+    "answered": [1001, 69]
+},
+{
+    "qid": 18,
+    "topic": "French Vocabulary",
+    "question": "By 50 BCE, which famous historical figure had conquered the area today known as France?",
+    "answers": [
+        "Julius Caesar"
+        ],
+    "correct_index": 3,
+    "difficulty": 2,
+    "answered": [404, 202]
+},
+{
+    "qid": 19,
+    "topic": "French Vocabulary",
+    "question": "Which French landmark was designed to be taken down after 20 years?",
+    "answers": [
+        "Eiffel Tower"
+        ],
+    "correct_index": 3,
+    "difficulty": 0,
+    "answered": [420, 45]
+},
+{
+    "qid": 20,
+    "topic": "French Vocabulary",
+    "question": "what is the national motto of France?",
+    "answers": [
+        "Liberty, equality, fraternity"
+        ],
+    "correct_index": 3,
+    "difficulty": 1,
+    "answered": [1337, 137]
+}
+]

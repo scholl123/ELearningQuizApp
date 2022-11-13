@@ -1,0 +1,21 @@
+[{
+    "uid": 1,
+    "fname": "Max",
+    "lname": "Mustermann",
+    "login": "mm1",
+    "pw": "e8e2171ab8ddee3f0358339fdc348169"
+},
+{
+    "uid": 2,
+    "fname": "Maria",
+    "lname": "Rossi",
+    "login": "mr1",
+    "pw": "eccd436ed0e5d46696a6d97befb902a0"
+},
+{
+    "uid": 3,
+    "fname": "Jan",
+    "lname": "Modaal",
+    "login": "jm1",
+    "pw": "cf94df64e344dba534b5bd0a08e85f2c"
+}]
