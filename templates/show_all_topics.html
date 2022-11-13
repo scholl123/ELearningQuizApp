@@ -1,56 +1,58 @@
-{% extends "base.html" %}
-{#{% block infoBox %}#}
-{#{% endblock infoBox %}#}
-{% block content %}
+{% extends "header.html" %}
 
-<div class="panel panel-default text-center" id="infoBox">
-    <div class="panel-body info-box">Information!</div>
+
+{% block info %}
+<div class="info-box  panel panel-default text-center">
+    <div class="panel-body info-box ">
+        See all Tpoics you've uploaded and check out their Questions!
+    </div>
 </div>
+{% endblock %}
 
+{% block main %}
 <div class="container-fluid">
+
     <div class="row">
         <div class="col-xs-12">
             <h1> Uploaded Topics:</h1>
         </div>
+
         <div class=" justify-content-center>">
             <div class="table-responsive container-fluid">
                 <table class="table-striped mx-auto w-auto" , style="width:100%">
                     <thead>
-                    <tr>
-                        <th>Topic Name</th>
-                        <th>Number of Questions</th>
-                        <th>Percentage in Easy</th>
-                        <th>Percentage in Medium</th>
-                        <th>Percentage in Hard</th>
-                        <th>Show all Questions</th>
-                    </tr>
+                        <tr>
+                            <th>Topic Name</th>
+                            <th>Number of Questions</th>
+                            <th>Percentage in Easy</th>
+                            <th>Percentage in Medium</th>
+                            <th>Percentage in Hard</th>
+                            <th>Show all Questions</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Machine Learning</td>
-                        <td>150</td>
-                        <td>20%</td>
-                        <td>50%</td>
-                        <td>30%</td>
-                        <td>
-                            <button type="button" class="btn">Show</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>French Vocabulary</td>
-                        <td>200</td>
-                        <td>50%</td>
-                        <td>30%</td>
-                        <td>20%</td>
-                        <td>
-                            <button type="button" class="btn">Show</button>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>Machine Learning</td>
+                            <td>150</td>
+                            <td>20%</td>
+                            <td>50%</td>
+                            <td>30%</td>
+                            <td><a class='btn btn-primary ' href="">Show</a></td>
+                        </tr>
+                        <tr>
+                            <td>French Vocabulary</td>
+                            <td>200</td>
+                            <td>50%</td>
+                            <td>30%</td>
+                            <td>20%</td>
+                            <td><a class='btn btn-primary ' href="">Show</a></td>
+                        </tr>
                     </tbody>
+
                 </table>
             </div>
         </div>
     </div>
 </div>
-{% endblock content%}
 
+{% endblock %}

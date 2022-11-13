@@ -1,0 +1,63 @@
+{% extends "header.html" %}
+
+
+{% block info %}
+<div class="info-box  panel panel-default text-center">
+    <div class="panel-body info-box ">
+        What do you want to learn today?
+    </div>
+</div>
+{% endblock %}
+
+{% block main %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="container justify-content-center">
+            <form>
+                <div class="row">
+                    <div class="col-xs-4 setting_box">
+
+                        <h3>Choose one (or more) Topics:</h3>
+                        <input type="checkbox" id="topic1" name="topic1" value="MachineLearning">
+                        <label for="MachineLearning"> Machine Learning</label><br>
+                        <input type="checkbox" id="topic2" name="topic2" value="French Vocabulary">
+                        <label for="French Vocabulary"> French Vocabulary</label><br>
+
+                    </div>
+
+                    <div class="col-xs-4 setting_box text-center">
+                        <h3>Set the Number of Questions:</h3>
+                        <input type="number" id="quantity" name="quantity" min="1" max="1000" step="1" value="25">
+                    </div>
+                    <div class="col-xs-3 setting_box">
+
+                        <h3>Choose one (or more) Difficulties:</h3>
+                        <input type="checkbox" id="easy" name="easy" value="easy">
+                        <label for="easy"> Easy</label><br>
+                        <input type="checkbox" id="medium" name="medium" value="medium">
+                        <label for="medium"> Medium</label><br>
+                        <input type="checkbox" id="hard" name="hard" value="hard">
+                        <label for="hard"> Hard</label><br>
+
+                    </div>
+                </div>
+                <br /> <br />
+                <div class="row">
+                    <div class="container col-xs-12  btn-submit text-center">
+                        <h3>Submit and Start a Quiz with this Settings:</h3>
+                        <input type="submit" class="btn btn-primary btn-block" value="Confirm and go to Quiz">
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <hr />
+
+    </div>
+</div>
+
+
+
+</div>
+</div>
+{% endblock %}
