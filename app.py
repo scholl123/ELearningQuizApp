@@ -1,6 +1,8 @@
 from flask import Flask
 from flask import render_template
+from DatabaseAPI import Database
 
+db = Database()
 app = Flask(__name__)
 
 navigation = {
