@@ -4,23 +4,33 @@ from hashlib import md5
 
 class Database:
 
-    def __init__(self, host='localhost', port=27017):
+    def __init__(self, host: str = 'localhost', port: int = 27017):
         """Initiate database connection with given host and port.
         If none is given, use default settings on mongoDB installation."""
         client = MongoClient(host, port=port)
         self.db = client.ELearnApp
 
-    def get_user(self, login, pw):
+    def get_user(self, login: str, pw: str) -> dict:
         """Get user information as dict. But not login and pw."""
         pw_hash = md5(pw.encode()).hexdigest()
         doc = self.db.User.find_one({'login': login, 'pw': pw_hash})
         return {k: doc[k] for k in {'uid', 'fname', 'lname'}}
 
-    def set_user(self, u_dict):
-        # TODO: implement account creation
-        pass
+    def set_user(self, u_dict: dict) -> int:
+        """Create or update user information."""
+        try:
+            key = u_dict['uid']
+        except KeyError:
+            key = self.db.User.find().sort('uid', -1).limit(1)[0]['uid'] + 1  # get last index
+            u_dict['uid'] = key
+            missing_keys = {'login', 'pw'}.difference(u_dict.keys())
+            if missing_keys:
+                raise Exception(f'Cannot add new user. Missing keys: {missing_keys}')
+            u_dict['pw'] = md5(u_dict['pw'].encode()).hexdigest()
+        self.db.User.update_one({'uid': key}, {'$set': u_dict}, upsert=True)
+        return 0
 
-    def get_questions(self, topic=None, num=0, qid=0):
+    def get_questions(self, topic: str = None, num: int = 0, qid: int = 0) -> dict | list[dict]:
         """Return a random sample of questions from a given topic as list.
         If no number is given, return all questions of that topic.
         If a specific question id is given, return only dict of that question."""
@@ -34,7 +44,7 @@ class Database:
         questions = [{k: d[k] for k in set(d.keys()).difference({'_id'})} for d in docs]
         return questions
 
-    def set_question(self, q_dict):
+    def set_question(self, q_dict: dict) -> int:
         """Tries to update an existing questions and difficulty.
         Creates a new db entry otherwise."""
         try:
@@ -46,17 +56,20 @@ class Database:
             key = self.db.Questions.find().sort('qid', -1).limit(1)[0]['qid'] + 1  # get last index
             q_dict['qid'] = key
             q_dict['answered'] = [0, 0]
+            missing_keys = {'topic', 'question', 'answers',
+                            'correct_index', 'difficulty'}.difference(q_dict.keys())
+            if missing_keys:
+                raise Exception(f'Cannot add new question. Missing keys: {missing_keys}')
         self.db.Questions.update_one({'qid': key}, {'$set': q_dict}, upsert=True)
         return 0
 
-    def get_progress(self, uid):
+    def get_progress(self, uid: int) -> dict:
         """Returns progress of a user as dict."""
         progress = self.db.Progress.find_one({'uid': uid})
         return {k: progress[k] for k in set(progress.keys()).difference({'_id'})}
 
-    def set_progress(self, p_dict):
-        """Tries to update existing progress for a given user.
-           Creates a new db entry otherwise for that specific user."""
+    def set_progress(self, p_dict: dict) -> int:
+        """Create or update progress for a given user."""
         try:
             key = p_dict['uid']
         except KeyError:
@@ -64,7 +77,7 @@ class Database:
         self.db.Progress.update_one({'uid': key}, {'$set': p_dict}, upsert=True)
         return 0
 
-    def get_badges(self, bid=0):
+    def get_badges(self, bid: int = 0) -> dict | list[dict]:
         """Returns a single badge as dict, if a badge id is given.
         Otherwise, returns a list of all possible badges."""
         if bid:
@@ -74,17 +87,20 @@ class Database:
         badges = [{k: d[k] for k in set(d.keys()).difference({'_id'})} for d in docs]
         return badges
 
-    def set_badge(self, b_dict):
+    def set_badge(self, b_dict: dict) -> int:
         """Tries to update an existing badge. Creates a new db entry otherwise."""
         try:
             key = b_dict['bid']
         except KeyError:
             key = self.db.Badges.find().sort('bid', -1).limit(1)[0]['bid'] + 1  # get last index
             b_dict['bid'] = key
+            missing_keys = {'name', 'target'}.difference(b_dict.keys())
+            if missing_keys:
+                raise Exception(f'Cannot add new badge. Missing keys: {missing_keys}')
         self.db.Badges.update_one({'bid': key}, {'$set': b_dict}, upsert=True)
         return 0
 
-    def get_user_statistics(self, uid):
+    def get_user_statistics(self, uid: int):
         # TODO: compute user evaluation
         pass
 
@@ -96,6 +112,9 @@ if __name__ == '__main__':
     print('User testing:')
     user = db.get_user('mm1', 'mm1')
     print(f'User information: {user}')
+    db.set_user({'uid': 1, 'fname': 'Maxi'})
+    user = db.get_user('mm1', 'mm1')
+    print(f'Update user name: {user}')
 
     print('\nQuestion testing:')
     qs = db.get_questions('Machine Learning')
