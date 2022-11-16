@@ -1,38 +1,30 @@
-{% extends "header.html" %}
-
+{% extends "base.html" %}
 
 {% block info %}
-<div class="info-box  panel panel-default text-center">
-    <div class="panel-body info-box ">
-        See how well you're doing and what Badges you've earned!
-    </div>
-</div>
-{% endblock %}
+    See how well you're doing and what Badges you've earned!
+{% endblock info %}
+
 {% block main %}
-
-<div class="container-fluid">
-
-    <div class="row">
-        <div class="col-xs-12">
-            <h1> Your Progress</h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1> Your Progress</h1>
+            </div>
         </div>
-
-    </div>
-    <div class="row  line_up">
-        <div class="col-xs-12">
-            <h1> Your Badges</h1>
-        </div>
-
-        <div class=" justify-content-center>">
-            <div class="table-responsive container-fluid">
-                <table class="table-striped mx-auto w-auto" , style="width:100%">
-                    <thead>
+        <div class="row  line_up">
+            <div class="col-xs-12">
+                <h1> Your Badges</h1>
+            </div>
+            <div class=" justify-content-center>">
+                <div class="table-responsive container-fluid">
+                    <table class="table-striped mx-auto w-auto" , style="width:100%">
+                        <thead>
                         <tr>
                             <th>Badge Name</th>
                             <th>Obtained?</th>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </thead>
+                        <tbody>
                         <tr>
                             <td>Finish first Quiz</td>
                             <td>Yes</td>
@@ -49,11 +41,10 @@
                             <td>Less than 1% of Questions currently on Hard</td>
                             <td>no</td>
                         </tr>
-                    </tbody>
-
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
-{% endblock %}
+{% endblock main %}

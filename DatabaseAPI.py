@@ -22,7 +22,7 @@ class Database:
 
     def get_questions(self, topic=None, num=0, qid=0):
         """Return a random sample of questions from a given topic as list.
-        Is no number is given, return all questions of that topic.
+        If no number is given, return all questions of that topic.
         If a specific question id is given, return only dict of that question."""
         if qid:
             doc = self.db.Questions.find_one({'qid': qid})

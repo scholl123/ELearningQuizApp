@@ -1,62 +1,44 @@
-{% extends "header.html" %}
-
+{% extends "base.html" %}
 
 {% block info %}
-<div class="info-box  panel panel-default text-center">
-    <div class="panel-body info-box ">
-        Upload a new Topic for your Quizzes!
-    </div>
-</div>
-{% endblock %}
+    Upload a new Topic for your Quizzes!
+{% endblock info %}
 
 {% block main %}
-<div class="container-fluid">
-
-    <div class="row">
-        <div class="col-xs-12">
-            <h1> Upload a new Topic:</h1>
-        </div>
-
-        <div class="container">
-            <form>
-                <div class="form-group">
-                    <label for="text">Name of Topic:</label>
-                    <input type="text" class="form-control" id="topic_name" placeholder="Enter Name" name="text">
-                </div>
-
-
-                <hr>
-                <div class="box">
-                    <div class="row">
-                        <div class="col-sm-12">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1> Upload a new Topic:</h1>
+            </div>
+            <div class="container">
+                <form>
+                    <div class="form-group">
+                        <label for="text">Name of Topic:</label>
+                        <input type="text" class="form-control" id="topic_name" placeholder="Enter Name" name="text">
+                    </div>
+                    <hr>
+                    <div class="box">
+                        <div class="row">
+                            <div class="col-sm-12">
                             <span class="control-fileupload">
                                 <label for="file1" class="text-left">Please choose a file on your computer.</label>
                                 <input type="file" id="file1">
                             </span>
+                            </div>
                         </div>
-
                     </div>
-                </div>
+                    <hr>
+                    <div class="container">
+                        <input type="submit" class="btn btn-primary btn-block" value="Submit">
+                    </div>
+                </form>
                 <hr>
-                <div class="container">
-                    <input type="submit" class="btn btn-primary btn-block" value="Submit">
-
-
-                </div>
-            </form>
-            <hr>
-            <h4>How to use it :</h4>
-
-            <p> Please only upload Excel, CSV or JSON Files.
-            </p>
-            <hr />
-
+                <h4>How to use it :</h4>
+                <p> Please only upload Excel, CSV or JSON Files.
+                </p>
+                <hr/>
+            </div>
         </div>
     </div>
 
-
-
-</div>
-</div>
-
-{% endblock %}
+{% endblock main %}

@@ -1,14 +1,9 @@
-{% extends "header.html" %}
-
+{% extends "base.html" %}
 
 {% block info %}
-<div class="info-box  panel panel-default text-center">
-    <div class="panel-body info-box ">
-        What do you want to learn today?
-    </div>
-</div>
-{% endblock %}
-{% block main %}
-<a class='btn btn-primary main_button center' href=quiz_settings>Start a Quiz</a>
+    What do you want to learn today?
+{% endblock info %}
 
-{% endblock %}
+{% block main %}
+    <a class='btn btn-primary main_button center' href={{ url_for('show_quiz_settings') }}>Start a Quiz</a>
+{% endblock main %}

@@ -1,35 +1,48 @@
-from flask import Flask
-from flask import render_template
+from flask import Flask, render_template, request, session
 from DatabaseAPI import Database
+
 
 db = Database()
 app = Flask(__name__)
 
-navigation = {
-    "Home": "Home"
-}
+
+# @app.route('/result',methods = ['POST', 'GET'])
+# def result():
+#   if request.method == 'POST':
+#      result = request.form
+#      return render_template("result.html",result = result) 
+
+@app.route("/")
+def index():
+    return render_template("start_page.html")
 
 
-@app.route('/')
-@app.route('/home')
-def home():  # put application's code here
-    # TODO: add auth
-    user = "Kenny"
-    return render_template("start_page.html", user=user)
-
-
-@app.route("/all-topics")
-def all_topics():
-    return render_template("show_all_topics.html")
+@app.route("/quiz_settings")
+def show_quiz_settings():
+    return render_template("quiz_settings.html")
 
 
 @app.route("/progress")
-def progress():
+def show_progress():
     return render_template("progress.html")
 
-@app.route('/upload')
-def upload():
+
+@app.route("/show_all_topics")
+def show_all_topics():
+    return render_template("show_all_topics.html")
+
+
+@app.route("/upload_new_topic")
+def show_upload_page():
     return render_template("upload_new_topic.html")
 
+
+@app.route("/result")
+def show_results():
+    values = [(15, 19), (10, 10), (4, 6), (1, 3)]
+    return render_template("show_quiz_result.html", result=values)
+
+
 if __name__ == '__main__':
+    # flask --app app.py --debug run
     app.run(debug=True)
