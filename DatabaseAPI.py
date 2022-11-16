@@ -54,19 +54,13 @@ class Database:
         progress = self.db.Progress.find_one({'uid': uid})
         return {k: progress[k] for k in set(progress.keys()).difference({'_id'})}
 
-    def set_progress(self, p_dict, uid=0):
+    def set_progress(self, p_dict):
         """Tries to update existing progress for a given user.
            Creates a new db entry otherwise for that specific user."""
         try:
             key = p_dict['uid']
-            if uid and uid != key:
-                raise Exception('Progress dict does not belong to given user id!')
         except KeyError:
-            if uid:
-                p_dict['uid'] = uid
-                key = uid
-            else:
-                raise Exception('Cannot associate progress with a user!')
+            raise Exception('No user id was given!')
         self.db.Progress.update_one({'uid': key}, {'$set': p_dict}, upsert=True)
         return 0
 
