@@ -1,0 +1,22 @@
+[
+  {
+    "uid": 1,
+    "username": "admin",
+    "password": "admin"
+  },
+  {
+    "uid": 2,
+    "username": "hellouser",
+    "password": "eccd436ed0e5d46696a6d97befb902a0"
+  },
+  {
+    "uid": 3,
+    "username": "ciaouser",
+    "password": "cf94df64e344dba534b5bd0a08e85f2c"
+  },
+  {
+    "uid": 4,
+    "username": "kenny",
+    "password": "pythonflask"
+  }
+]

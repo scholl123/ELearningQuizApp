@@ -17,15 +17,20 @@
         <div class="container-fluid">
             <ul class="nav navbar-nav">
                 <div class="navbar-header">
-                    <a class="navbar-brand user">User: {{ user }} </a>
+                    {% if user %}
+                    <a class="navbar-brand user">{{ user }}</a>
+                    {% else %}
+                    <a class="navbar-brand user">Max Musterboy</a>
+                    {% endif %}
+
                 </div>
                 <li><a href={{ url_for('index') }}>Home</a></li>
-                <li><a href={{ url_for('show_progress') }}>Check your Progress</a></li>
+                <li><a href={{ url_for('show_progress') }}>Progress</a></li>
                 <li><a href={{ url_for('show_all_topics') }}>Show all Topics</a></li>
-                <li><a href={{ url_for('show_upload_page') }}>Upload a new Topic</a></li>
+                <li><a href={{ url_for('show_upload_page') }}>Upload new Topic</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right right-header-button">
-                <li><a class='btn navbar-btn ' href=quiz_settings>Start a Quiz</a></li>
+                <li><a class='btn navbar-btn' href={{ url_for('show_quiz_settings') }}>Start a Quiz</a></li>
             </ul>
         </div>
     </nav>

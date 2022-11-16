@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block info %}
+
+{% endblock info %}
+
+{% block main %}
+    {% for key,value in form_data.items() %}
+        <h2> {{ key }}</h2>
+        <p> {{ value }}</p>
+    {% endfor %}
+{% endblock main %}

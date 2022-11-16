@@ -10,7 +10,7 @@ app = Flask(__name__)
 # def result():
 #   if request.method == 'POST':
 #      result = request.form
-#      return render_template("result.html",result = result) 
+#      return render_template("result.multiple_choice.html",result = result)
 
 @app.route("/")
 def index():
@@ -20,6 +20,11 @@ def index():
 @app.route("/quiz_settings")
 def show_quiz_settings():
     return render_template("quiz_settings.html")
+
+
+# @app.route("/quiz_settings?topics=")
+# def show_quiz_settings():
+#     return render_template("quiz_settings.multiple_choice.html")
 
 
 @app.route("/progress")
@@ -42,7 +47,31 @@ def show_results():
     values = [(15, 19), (10, 10), (4, 6), (1, 3)]
     return render_template("show_quiz_result.html", result=values)
 
+# test reading form input
+@app.route("/input_test", methods=['POST', 'GET'])
+def show_input():
+    if request.method == 'GET':
+        return "Something wrong"
+    elif request.method == 'POST':
+        form_data = request.form
+        print(form_data.to_dict())
+        return render_template("input_test.html", form_data=form_data)
+
+@app.route("/question")
+def question():
+    return render_template("quiz_question.html")
+
+
+def is_valid_login(username, password):
+    with app.test_request_context('/hello', method='POST'):
+        # now you can do something with the request until the
+        # end of the with block, such as basic assertions:
+        assert request.path == '/hello'
+        assert request.method == 'POST'
+    pass
+
 
 if __name__ == '__main__':
     # flask --app app.py --debug run
+    # db_sql.init_app(app)
     app.run(debug=True)

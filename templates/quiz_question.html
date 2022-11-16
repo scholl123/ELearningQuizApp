@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
 {% block info %}
-    Information
+    Pick an answer
 {% endblock info %}
 
 {% block main %}
-    <div class="container-fluid">
+    <div class="container-fluid ">
         <form>
             <div class=" row">
                 <div class="col-xs-12 text-center">
@@ -13,8 +13,6 @@
                     <h1>What's 1+1? </h1>
                 </div>
             </div>
-            <hr/>
-            <hr/>
             <div class=" row">
                 <div class="col-xs-12  text-center">
                     <h4>Your Answer:</h4>
@@ -22,20 +20,11 @@
                 </div>
             </div>
             <hr/>
-            <hr/>
-            <hr/>
-            <div class="col-xs-12 text-center line_up ">
-                <h1>Your Answer was: CORRECT/FALSE </h1>
-                <hr/>
-                <h3> The correct Answer is:</h3>
-                <p> $Musterlösung$</p>
-            </div>
+            <div class=" row">
 
-            <div class=" row ">
-                <div class="container col-xs-2  btn-submit center    ">
-                    <input type="submit" id="next_q" class="btn btn-primary btn-block " value="Next Question">
+                <div class="container col-xs-2  btn-submit center ">
+                    <input type="submit" id="next_q" class="btn btn-primary btn-block " value="Check your Answer">
                 </div>
-
             </div>
         </form>
     </div>
