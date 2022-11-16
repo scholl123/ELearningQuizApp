@@ -8,28 +8,30 @@
     <div class="container-fluid">
         <div class="row">
             <div class="container justify-content-center">
-                <form action="/input_test" method="POST">
+                <form action={{ url_for("quiz") }} method="POST">
                     <div class="row">
                         <div class="col-xs-4 setting_box">
                             <h3>Choose one (or more) Topics:</h3>
                             <input type="checkbox" id="topic1" name="topics" value="MachineLearning">
-                            <label for="MachineLearning"> Machine Learning</label><br>
+                            <label for="topic1">Machine Learning</label><br>
                             <input type="checkbox" id="topic2" name="topics" value="French Vocabulary">
-                            <label for="French Vocabulary"> French Vocabulary</label><br>
+                            <label for="topic2">French Vocabulary</label><br>
                         </div>
                         <div class="col-xs-4 setting_box text-center">
                             <h3>Set the Number of Questions:</h3>
                             <input type="number" id="quantity" name="quantity" min="1" max="100" step="1" value="25" required>
                         </div>
                         <div class="col-xs-3 setting_box">
-{#                            Make inputs required#}
+{#                            TODO: Make inputs required#}
                             <h3>Choose one (or more) Difficulties:</h3>
                             <input type="checkbox" id="easy" name="difficulty" value="easy">
-                            <label for="easy"> Easy</label><br>
+                            <label for="easy">Easy</label><br>
+
                             <input type="checkbox" id="medium" name="difficulty" value="medium">
-                            <label for="medium"> Medium</label><br>
+                            <label for="medium">Medium</label><br>
+
                             <input type="checkbox" id="hard" name="difficulty" value="hard">
-                            <label for="hard"> Hard</label><br>
+                            <label for="hard">Hard</label><br>
 
                         </div>
                     </div>

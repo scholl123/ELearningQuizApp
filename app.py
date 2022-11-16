@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, redirect, url_for
 from DatabaseAPI import Database
 
 
@@ -22,11 +22,6 @@ def show_quiz_settings():
     return render_template("quiz_settings.html")
 
 
-# @app.route("/quiz_settings?topics=")
-# def show_quiz_settings():
-#     return render_template("quiz_settings.multiple_choice.html")
-
-
 @app.route("/progress")
 def show_progress():
     return render_template("progress.html")
@@ -48,19 +43,32 @@ def show_results():
     return render_template("show_quiz_result.html", result=values)
 
 # test reading form input
-@app.route("/input_test", methods=['POST', 'GET'])
-def show_input():
+@app.route("/quiz", methods=['POST', 'GET'])
+def quiz():
     if request.method == 'GET':
         return "Something wrong"
     elif request.method == 'POST':
         form_data = request.form
         print(form_data.to_dict())
-        return render_template("input_test.html", form_data=form_data)
+        return render_template("multiple_choice.html", form_data=form_data)
+
+# @app.route("/quiz")
+# def quiz():
+#     return render_template("multiple_choice.html")
+
 
 @app.route("/question")
 def question():
     return render_template("quiz_question.html")
 
+
+@app.route("/testing", methods=['POST', 'GET'])
+def testing():
+    if request.method == 'POST':
+        return redirect(url_for("quiz"))
+    else:
+        form_data = request.form
+        return "GET"
 
 def is_valid_login(username, password):
     with app.test_request_context('/hello', method='POST'):
