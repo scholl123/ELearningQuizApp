@@ -17,8 +17,18 @@ class Database:
         return {k: doc[k] for k in {'uid', 'fname', 'lname'}}
 
     def set_user(self, u_dict):
-        # TODO: implement account creation
-        pass
+        """Create or update user information."""
+        try:
+            key = u_dict['uid']
+        except KeyError:
+            key = self.db.User.find().sort('uid', -1).limit(1)[0]['uid'] + 1  # get last index
+            u_dict['uid'] = key
+            missing_keys = {'login', 'pw'}.difference(u_dict.keys())
+            if missing_keys:
+                raise Exception(f'Cannot add new user. Missing keys: {missing_keys}')
+            u_dict['pw'] = md5(u_dict['pw'].encode()).hexdigest()
+        self.db.User.update_one({'uid': key}, {'$set': u_dict}, upsert=True)
+        return 0
 
     def get_questions(self, topic=None, num=0, qid=0):
         """Return a random sample of questions from a given topic as list.
@@ -46,6 +56,10 @@ class Database:
             key = self.db.Questions.find().sort('qid', -1).limit(1)[0]['qid'] + 1  # get last index
             q_dict['qid'] = key
             q_dict['answered'] = [0, 0]
+            missing_keys = {'topic', 'question', 'answers',
+                            'correct_index', 'difficulty'}.difference(q_dict.keys())
+            if missing_keys:
+                raise Exception(f'Cannot add new question. Missing keys: {missing_keys}')
         self.db.Questions.update_one({'qid': key}, {'$set': q_dict}, upsert=True)
         return 0
 
@@ -55,8 +69,7 @@ class Database:
         return {k: progress[k] for k in set(progress.keys()).difference({'_id'})}
 
     def set_progress(self, p_dict):
-        """Tries to update existing progress for a given user.
-           Creates a new db entry otherwise for that specific user."""
+        """Create or update progress for a given user."""
         try:
             key = p_dict['uid']
         except KeyError:
@@ -81,6 +94,9 @@ class Database:
         except KeyError:
             key = self.db.Badges.find().sort('bid', -1).limit(1)[0]['bid'] + 1  # get last index
             b_dict['bid'] = key
+            missing_keys = {'name', 'target'}.difference(b_dict.keys())
+            if missing_keys:
+                raise Exception(f'Cannot add new badge. Missing keys: {missing_keys}')
         self.db.Badges.update_one({'bid': key}, {'$set': b_dict}, upsert=True)
         return 0
 
@@ -96,6 +112,9 @@ if __name__ == '__main__':
     print('User testing:')
     user = db.get_user('mm1', 'mm1')
     print(f'User information: {user}')
+    db.set_user({'uid': 1, 'fname': 'Maxi'})
+    user = db.get_user('mm1', 'mm1')
+    print(f'Update user name: {user}')
 
     print('\nQuestion testing:')
     qs = db.get_questions('Machine Learning')
