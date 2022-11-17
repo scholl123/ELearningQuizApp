@@ -14,14 +14,14 @@
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-default">
+    <nav id="top-nav" class="navbar navbar-default">
         <div class="container-fluid">
             <ul class="nav navbar-nav">
                 <div class="navbar-header">
                     {% if user %}
-                    <a class="navbar-brand user">{{ user }}</a>
+                        <a class="navbar-brand user">{{ user }}</a>
                     {% else %}
-                    <a class="navbar-brand user">Max Musterboy</a>
+                        <a class="navbar-brand user">Max Musterboy</a>
                     {% endif %}
 
                 </div>
@@ -31,24 +31,26 @@
                 <li><a href={{ url_for('show_upload_page') }}>Upload new Topic</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right right-header-button">
-                <li><a class='btn navbar-btn' href={{ url_for('show_quiz_settings') }}>Start a Quiz</a></li>
+                <li><a class='btn navbar-btn' href={{ url_for('index') }}>Start a Quiz</a></li>
             </ul>
         </div>
     </nav>
 </header>
 
-<div id="info">
-    <div class="info-box panel panel-default text-center">
-        <div id="info-text" class="panel-body info-box">
-            {% block info %}
-            {% endblock info %}
+<div id="wrapper">
+    <div id="main">
+        <div id="info" class="">
+            <div id="info-text" class="alert alert-warning" role="alert">
+            <h3>
+                {% block info %}
+                {% endblock info %}
+            </h3>
+            </div>
         </div>
-    </div>
-</div>
+        {% block main %}
 
-<div id="main">
-    {% block main %}
-    {% endblock main %}
+        {% endblock main %}
+    </div>
 </div>
 
 </body>

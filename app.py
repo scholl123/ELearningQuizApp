@@ -12,13 +12,9 @@ app = Flask(__name__)
 #      result = request.form
 #      return render_template("result.multiple_choice.html",result = result)
 
+
 @app.route("/")
 def index():
-    return render_template("start_page.html")
-
-
-@app.route("/quiz_settings")
-def show_quiz_settings():
     return render_template("quiz_settings.html")
 
 
@@ -51,10 +47,6 @@ def quiz():
         form_data = request.form
         print(form_data.to_dict())
         return render_template("multiple_choice.html", form_data=form_data)
-
-# @app.route("/quiz")
-# def quiz():
-#     return render_template("multiple_choice.html")
 
 
 @app.route("/question")

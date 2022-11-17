@@ -1,9 +1,6 @@
 {% extends "base.html" %}
 {% block info %}
-    <form action="/uga" method="POST">
-        <input type="text" placeholder="sheet">
-        <input type="submit">
-    </form>
+    Answer all questions!
 {% endblock info %}
 {% block main %}
     <div class="container-fluid">
@@ -15,7 +12,7 @@
                 <div class="modal-body">
                     <div class="col-xs-3 5"></div>
                     <div class="quiz" id="quiz">
-                        <form action="/testing" method="POST">
+                        <form action="/quiz" method="POST">
                             <label for="answer-1" class="element-animation1 btn btn-lg btn-danger btn-block">
                         <span class="btn-label">
                             <i class="glyphicon glyphicon-chevron-right"></i>
@@ -45,11 +42,12 @@
                             <i class="glyphicon glyphicon-chevron-right"></i>
                         </span>
                                 <input id="answer-4" type="radio" name="q_answer" value="4">
-                                Cocker Spaniels
+                                <p>Cocker Spaniels Cocker Spaniels Cocker Spaniels Cocker Spaniels Cocker Spaniels </p>
                             </label>
                             <input id="submit" type="submit" class="btn btn-lg btn-block" value="Submit">
                         </form>
                     </div>
+                    <div id="counter" class="">5</div>
                 </div>
             </div>
         </div>
