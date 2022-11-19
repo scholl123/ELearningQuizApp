@@ -14,7 +14,8 @@ class Database:
         """Get user information as dict. But not login and pw."""
         pw_hash = md5(pw.encode()).hexdigest()
         doc = self.db.User.find_one({'login': login, 'pw': pw_hash})
-        return {k: doc[k] for k in {'uid', 'fname', 'lname'}}
+        if doc is not None:
+            return {k: doc[k] for k in {'uid', 'fname', 'lname'}}
 
     def set_user(self, u_dict: dict) -> int:
         """Create or update user information."""
@@ -30,7 +31,8 @@ class Database:
         self.db.User.update_one({'uid': key}, {'$set': u_dict}, upsert=True)
         return 0
 
-    def get_questions(self, topic: str = None, num: int = 0, qid: int = 0, diff: int = None): #-> dict | list[dict]:
+    def get_questions(self, topic: str = None, num: int = 0,
+                      qid: int = 0, diff: int = None):  # -> dict | list[dict]:
         """Return a random sample of questions from a given topic as list.
         If no number is given, return all questions of that topic.
         If a difficulty is given, return all questions of that topic with this difficulty.
@@ -38,8 +40,8 @@ class Database:
         if qid:
             doc = self.db.Questions.find_one({'qid': qid})
             return {k: doc[k] for k in set(doc.keys()).difference({'_id'})}
-        if diff != None:
-            pipeline = [{'$match': {'topic': topic, 'difficulty':  diff}}]
+        if diff is None:
+            pipeline = [{'$match': {'topic': topic, 'difficulty': diff}}]
         else:
             pipeline = [{'$match': {'topic': topic}}]
         if num:
@@ -55,7 +57,7 @@ class Database:
             key = q_dict['qid']
             answered = q_dict['answered'][0]
             false = q_dict['answered'][1]
-            q_dict['difficulty'] = int(false*100/answered) // 33
+            q_dict['difficulty'] = int(false * 100 / answered) // 33
         except KeyError:
             key = self.db.Questions.find().sort('qid', -1).limit(1)[0]['qid'] + 1  # get last index
             q_dict['qid'] = key
@@ -81,7 +83,7 @@ class Database:
         self.db.Progress.update_one({'uid': key}, {'$set': p_dict}, upsert=True)
         return 0
 
-    def get_badges(self, bid: int = 0):# -> dict | list[dict]:
+    def get_badges(self, bid: int = 0):  # -> dict | list[dict]:
         """Returns a single badge as dict, if a badge id is given.
         Otherwise, returns a list of all possible badges."""
         if bid:
@@ -104,16 +106,19 @@ class Database:
         self.db.Badges.update_one({'bid': key}, {'$set': b_dict}, upsert=True)
         return 0
 
-    def get_topics(self) -> list:
+    def get_topics(self) -> dict:
         """Return all currently available Topics from the Collection Questions."""
         all_topics = self.db.Questions.distinct("topic")
         topic_number_questions = dict()
         for top in all_topics:
-            topic_number_questions[top] = { 
-            "num_questions" : len(self.get_questions(top) ),
-            "per_easy_questions" : round(len(self.get_questions(top, diff=0))/ len(self.get_questions(top)),2)*100,
-            "per_medium_questions" : round(len(self.get_questions(top, diff=1))/ len(self.get_questions(top)),2)*100 ,
-            "per_hard_questions" : round(len(self.get_questions(top, diff=2))/ len(self.get_questions(top)),2)*100
+            topic_number_questions[top] = {
+                "num_questions": len(self.get_questions(top)),
+                "per_easy_questions": round(
+                    len(self.get_questions(top, diff=0)) / len(self.get_questions(top)), 2) * 100,
+                "per_medium_questions": round(
+                    len(self.get_questions(top, diff=1)) / len(self.get_questions(top)), 2) * 100,
+                "per_hard_questions": round(
+                    len(self.get_questions(top, diff=2)) / len(self.get_questions(top)), 2) * 100
             }
         return topic_number_questions
 
@@ -136,7 +141,7 @@ if __name__ == '__main__':
     qs = db.get_questions('Machine Learning')
     print(f'Number of all ML questions: {len(qs)}')
     qs = db.get_questions('Machine Learning', 5)
-    print(f'Got only 5 ML Questions: {len(qs)==5}')
+    print(f'Got only 5 ML Questions: {len(qs) == 5}')
     print(f'Let`s look these 5 random questions: {qs}')
 
     db.set_question({'topic': 'Machine Learning', 'question': 'Yo test',
@@ -162,7 +167,7 @@ if __name__ == '__main__':
     print(f'Add a new badge: {db.get_badges(bid=last_badge_id)}')
     db.set_badge({'bid': last_badge_id, 'target': 1000})
     print(f'And modify it: {db.get_badges(bid=last_badge_id)}')
-    
+
     print('\nGet Topic Testing:')
     get_topics = db.get_topics()
     print("The Topics and it's counts", get_topics)

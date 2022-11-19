@@ -1,7 +1,9 @@
-from flask import Flask, render_template, request, session, redirect, url_for,flash
+from flask import Flask, render_template, request, session, redirect, url_for, flash
 from DatabaseAPI import Database
 from werkzeug.utils import secure_filename
-import os,  openpyxl
+from hashlib import md5
+import os
+import openpyxl
 import pandas as pd
 import file_handling
 
@@ -12,6 +14,8 @@ db = Database()
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+uid = None
+user = None
 
 # @app.route('/result',methods = ['POST', 'GET'])
 # def result():
@@ -20,10 +24,27 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 #      return render_template("result.multiple_choice.html",result = result)
 
 
-
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def index():
-    return render_template("quiz_settings.html")
+    """root directory of the web interface. Login interface"""
+    # when credentials are submitted
+    if request.method == 'POST':
+        # get input from entry fields
+        name = request.form['name']
+        password = request.form['password']
+        # check for if admin logged in
+        doc = db.get_user(name, password)
+        if doc is not None:
+            global uid
+            global user
+            uid = doc['uid']
+            user = f'{doc["fname"]} {doc["lname"]}'
+            return render_template("quiz_settings.html", user=user)
+        # login/password not found, return error message
+        return render_template('login.html', error=1)
+    # initial call
+    else:
+        return render_template('login.html')
 
 
 @app.route("/progress")
@@ -37,33 +58,33 @@ def show_progress():
         if badge_info["target"] == -1:
             badge_info["target"] = 1
             
-        badges.append([ badge_info,count, obtained ]  )
+        badges.append([badge_info, count, obtained])
     del user_progress_data["uid"]
     del user_progress_data["badges"]
-    return render_template("progress.html", progress_data = user_progress_data, badge_data = badges)
+    return render_template("progress.html", progress_data=user_progress_data, badge_data=badges)
 
 
 @app.route("/show_all_topics")
 def show_all_topics():
     topics = db.get_topics()
-    return render_template("show_all_topics.html", topics = topics)
+    return render_template("show_all_topics.html", topics=topics)
 
 
 @app.route("/show_one_topic", methods=['POST'])
 def show_single_topic():
     if request.method == 'POST':
-        difficulty_lvls = {0:"easy", 1:"medium", 2:"hard"}
+        difficulty_levels = {0: "easy", 1: "medium", 2: "hard"}
         text = request.form.get("topicId")
         questions = db.get_questions(text)
         for quest in questions:
-            quest["difficulty"] = difficulty_lvls[quest["difficulty"]]
+            quest["difficulty"] = difficulty_levels[quest["difficulty"]]
         return render_template("show_one_topic.html", topic=text, questions=questions)
-    
 
 
 @app.route("/upload_new_topic")
 def show_upload_page():
     return render_template("upload_new_topic.html")
+
 
 @app.route("/uploaded", methods=['POST'])
 def show_uploaded_page():
@@ -75,24 +96,24 @@ def show_uploaded_page():
         
         if file and file_handling.allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            
-            
+
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             x = file_handling.transform_input_file_to_topic(file.filename,
-                                                            topic = request.form.get("topic_name"), file=file) 
+                                                            topic=request.form.get("topic_name"),
+                                                            file=file)
             [db.set_question(q) for q in x]
             return render_template("uploaded.html", notice=1)
         else:
-           return render_template("uploaded.html", notice=2) 
+            return render_template("uploaded.html", notice=2)
     else:
         return render_template("uploaded.html", notice=0)
-
 
 
 @app.route("/result")
 def show_results():
     values = [(15, 19), (10, 10), (4, 6), (1, 3)]
     return render_template("show_quiz_result.html", result=values)
+
 
 # test reading form input
 @app.route("/quiz", methods=['POST', 'GET'])
@@ -118,6 +139,7 @@ def testing():
         form_data = request.form
         return "GET"
 
+
 def is_valid_login(username, password):
     with app.test_request_context('/hello', method='POST'):
         # now you can do something with the request until the
@@ -126,6 +148,7 @@ def is_valid_login(username, password):
         assert request.method == 'POST'
     pass
 
+
 app.secret_key = 'secret example key'
 if __name__ == '__main__':
     # flask --app app.py --debug run
@@ -133,5 +156,5 @@ if __name__ == '__main__':
 
     app.config['SESSION_TYPE'] = 'filesystem'
 
-    session.init_app(app)
+    # session.init_app(app)
     app.run(debug=True)
