@@ -40,7 +40,7 @@ class Database:
         if qid:
             doc = self.db.Questions.find_one({'qid': qid})
             return {k: doc[k] for k in set(doc.keys()).difference({'_id'})}
-        if diff is None:
+        if diff is not None:
             pipeline = [{'$match': {'topic': topic, 'difficulty': diff}}]
         else:
             pipeline = [{'$match': {'topic': topic}}]
@@ -144,13 +144,13 @@ if __name__ == '__main__':
     print(f'Got only 5 ML Questions: {len(qs) == 5}')
     print(f'Let`s look these 5 random questions: {qs}')
 
-    db.set_question({'topic': 'Machine Learning', 'question': 'Yo test',
-                     'answers': ['a', 'b'],
-                     'correct_index': 0, 'difficulty': 0})
-    last_question_id = db.db.Questions.find().sort('qid', -1).limit(1)[0]['qid']
-    print(f'Create new dummy question: {db.get_questions(qid=last_question_id)}')
-    db.set_question({'qid': last_question_id, 'answered': [100, 78]})
-    print(f'And modify it: {db.get_questions(qid=last_question_id)}')
+    #db.set_question({'topic': 'Machine Learning', 'question': 'Yo test',
+    #                 'answers': ['a', 'b'],
+    #                 'correct_index': 0, 'difficulty': 0})
+    #last_question_id = db.db.Questions.find().sort('qid', -1).limit(1)[0]['qid']
+    #print(f'Create new dummy question: {db.get_questions(qid=last_question_id)}')
+   # db.set_question({'qid': last_question_id, 'answered': [100, 78]})
+    #print(f'And modify it: {db.get_questions(qid=last_question_id)}')
 
     print('\nProgress testing:')
     pg = db.get_progress(1)
