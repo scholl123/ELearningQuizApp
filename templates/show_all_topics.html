@@ -1,53 +1,57 @@
 {% extends "base.html" %}
 
 {% block info %}
-    See all Topics you've uploaded and check out their Questions!
+See all Topics you've uploaded and check out their Questions!
 {% endblock %}
 
+{%set all_topics = topics%}
+
 {% block main %}
-    <div class="container-fluid">
+<div class="container-fluid">
 
-        <div class="row">
-            <div class="col-xs-12">
-                <h1> Uploaded Topics:</h1>
-            </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <h1> Uploaded Topics:</h1>
+        </div>
 
-            <div class=" justify-content-center>">
-                <div class="table-responsive container-fluid">
-                    <table class="table-striped mx-auto w-auto" , style="width:100%">
-                        <thead>
+        <div class=" justify-content-center>">
+            <div class="table-responsive container-fluid">
+                <table class="table-striped mx-auto w-auto" , style="width:100%">
+                    <thead>
                         <tr>
                             <th>Topic Name</th>
                             <th>Number of Questions</th>
-                            <th>Percentage in Easy</th>
-                            <th>Percentage in Medium</th>
-                            <th>Percentage in Hard</th>
+                            <th>Percentage of Easy Questions</th>
+                            <th>Percentage of Medium Questions</th>
+                            <th>Percentage of Hard Questions</th>
                             <th>Show all Questions</th>
                         </tr>
-                        </thead>
-                        <tbody>
+                    </thead>
+                    <tbody>
+                        {%for topic_name in all_topics.keys() %}
+                        {%set topic_values = all_topics[topic_name]%}
                         <tr>
-                            <td>Machine Learning</td>
-                            <td>150</td>
-                            <td>20%</td>
-                            <td>50%</td>
-                            <td>30%</td>
-                            <td><a class='btn btn-primary ' href="">Show</a></td>
-                        </tr>
-                        <tr>
-                            <td>French Vocabulary</td>
-                            <td>200</td>
-                            <td>50%</td>
-                            <td>30%</td>
-                            <td>20%</td>
-                            <td><a class='btn btn-primary ' href="">Show</a></td>
-                        </tr>
-                        </tbody>
 
-                    </table>
-                </div>
+                            <td> {{topic_name}}</td>
+                            <td>{{topic_values['num_questions']}}</td>
+                            <td>{{topic_values['per_easy_questions']}}%</td>
+                            <td>{{topic_values['per_medium_questions']}}%</td>
+                            <td>{{topic_values['per_hard_questions']}}%</td>
+                            <td>
+                                <form action="/show_one_topic" method="POST">
+                                    <input type="hidden" id="topicId" name="topicId" value='{{topic_name}}'>
+                                    <input class='btn btn-primary' type="submit" value="Show">
+                                </form>
+
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
             </div>
         </div>
     </div>
+</div>
 
 {% endblock %}

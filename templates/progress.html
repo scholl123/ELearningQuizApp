@@ -1,50 +1,68 @@
 {% extends "base.html" %}
 
 {% block info %}
-    See how well you're doing and what Badges you've earned!
+See how well you're doing and what Badges you've earned!
 {% endblock info %}
 
 {% block main %}
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-12">
-                <h1> Your Progress</h1>
-            </div>
-        </div>
-        <div class="row  line_up">
-            <div class="col-xs-12">
-                <h1> Your Badges</h1>
-            </div>
+
+{% set data = progress_data %}
+{% set b_data = badge_data %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>Your Progress</h1>
             <div class=" justify-content-center>">
                 <div class="table-responsive container-fluid">
                     <table class="table-striped mx-auto w-auto" , style="width:100%">
                         <thead>
-                        <tr>
-                            <th>Badge Name</th>
-                            <th>Obtained?</th>
-                        </tr>
+                            <tr>
+                                <th>Topic Name</th>
+                                <th>Score</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>Finish first Quiz</td>
-                            <td>Yes</td>
-                        </tr>
-                        <tr>
-                            <td>More than 100 Questions on Easy</td>
-                            <td>Yes</td>
-                        </tr>
-                        <tr>
-                            <td>All Questions of a Topic on Easy</td>
-                            <td>No</td>
-                        </tr>
-                        <tr>
-                            <td>Less than 1% of Questions currently on Hard</td>
-                            <td>no</td>
-                        </tr>
+                            {% for topic_key in data.keys() %}
+                            <TR>
+                                <TD class="c1">{{topic_key}}</TD>
+                                <TD class="c2">You got {{data[topic_key][1]}} out of {{data[topic_key][0]}}</TD>
+                            </TR>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+    <div class="row  line_up">
+        <div class="col-xs-12">
+            <h1>Your Badges</h1>
+        </div>
+        <div class=" justify-content-center>">
+            <div class="table-responsive container-fluid">
+                <table class="table-striped mx-auto w-auto" , style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Badge Name</th>
+                            <th>Your Status</th>
+                            <th>Obtained?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {% for badge in b_data%}
+                        <TR>
+                            <TD class="c1">{{badge[0]["name"]}}</TD>
+                            <TD class="c2">{{badge[1]}} /{{badge[0]["target"]}}</TD>
+                            <TD class="c4">{{badge[2]}}</TD>
+                        </TR>
+                        {% endfor %}
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock main %}

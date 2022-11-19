@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block info %}
+See one Topic:
+{% endblock %}
+
+
+{% block main %}
+{%set curr_topic = topic%}
+{%set questions = questions%}
+<!--{'topic': 'French Vocabulary', 'correct_index': 0, 'difficulty': 1, 'qid': 11, 'question': 'When was Mahatma Gandhi born?', 'answers': ['October 2, 1869', 'December 15, 1872', 'July 18, 1918', 'January 15, 1929'], 'answered': [548, 456]} -->
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h1> {{curr_topic}}</h1>
+        </div>
+
+        <div class=" justify-content-center>">
+            <div class="table-responsive container-fluid">
+                <table class="table-striped mx-auto w-auto" , style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Question</th>
+                            <th>Answer</th>
+                            <th>Difficulty</th>
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for q in questions %}
+                        <tr>
+                            <td>{{q['question']}}</td>
+                            <td>
+                                {%if q['answers']|length == 1%}
+                                {{q['answers'][0]}}
+                                {%else%}
+                                {{q['answers'][q['correct_index']]}}
+                                {%endif%}
+
+                            </td>
+                            <td>{{q["difficulty"]}}</td>
+                            <td><button type="button" class="btn">Edit</button></td>
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

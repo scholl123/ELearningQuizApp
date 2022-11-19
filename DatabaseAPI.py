@@ -30,14 +30,18 @@ class Database:
         self.db.User.update_one({'uid': key}, {'$set': u_dict}, upsert=True)
         return 0
 
-    def get_questions(self, topic: str = None, num: int = 0, qid: int = 0) -> dict | list[dict]:
+    def get_questions(self, topic: str = None, num: int = 0, qid: int = 0, diff: int = None): #-> dict | list[dict]:
         """Return a random sample of questions from a given topic as list.
         If no number is given, return all questions of that topic.
+        If a difficulty is given, return all questions of that topic with this difficulty.
         If a specific question id is given, return only dict of that question."""
         if qid:
             doc = self.db.Questions.find_one({'qid': qid})
             return {k: doc[k] for k in set(doc.keys()).difference({'_id'})}
-        pipeline = [{'$match': {'topic': topic}}]
+        if diff != None:
+            pipeline = [{'$match': {'topic': topic, 'difficulty':  diff}}]
+        else:
+            pipeline = [{'$match': {'topic': topic}}]
         if num:
             pipeline.append({'$sample': {'size': num}})
         docs = self.db.Questions.aggregate(pipeline)
@@ -77,7 +81,7 @@ class Database:
         self.db.Progress.update_one({'uid': key}, {'$set': p_dict}, upsert=True)
         return 0
 
-    def get_badges(self, bid: int = 0) -> dict | list[dict]:
+    def get_badges(self, bid: int = 0):# -> dict | list[dict]:
         """Returns a single badge as dict, if a badge id is given.
         Otherwise, returns a list of all possible badges."""
         if bid:
@@ -100,6 +104,19 @@ class Database:
         self.db.Badges.update_one({'bid': key}, {'$set': b_dict}, upsert=True)
         return 0
 
+    def get_topics(self) -> list:
+        """Return all currently available Topics from the Collection Questions."""
+        all_topics = self.db.Questions.distinct("topic")
+        topic_number_questions = dict()
+        for top in all_topics:
+            topic_number_questions[top] = { 
+            "num_questions" : len(self.get_questions(top) ),
+            "per_easy_questions" : round(len(self.get_questions(top, diff=0))/ len(self.get_questions(top)),2)*100,
+            "per_medium_questions" : round(len(self.get_questions(top, diff=1))/ len(self.get_questions(top)),2)*100 ,
+            "per_hard_questions" : round(len(self.get_questions(top, diff=2))/ len(self.get_questions(top)),2)*100
+            }
+        return topic_number_questions
+
     def get_user_statistics(self, uid: int):
         # TODO: compute user evaluation
         pass
@@ -108,7 +125,6 @@ class Database:
 if __name__ == '__main__':
     # do some testing
     db = Database()
-
     print('User testing:')
     user = db.get_user('mm1', 'mm1')
     print(f'User information: {user}')
@@ -146,3 +162,7 @@ if __name__ == '__main__':
     print(f'Add a new badge: {db.get_badges(bid=last_badge_id)}')
     db.set_badge({'bid': last_badge_id, 'target': 1000})
     print(f'And modify it: {db.get_badges(bid=last_badge_id)}')
+    
+    print('\nGet Topic Testing:')
+    get_topics = db.get_topics()
+    print("The Topics and it's counts", get_topics)
