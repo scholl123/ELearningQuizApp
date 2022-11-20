@@ -27,6 +27,8 @@ user = None
 @app.route("/", methods=['GET', 'POST'])
 def index():
     """root directory of the web interface. Login interface"""
+    global uid
+    global user
     # when credentials are submitted
     if request.method == 'POST':
         # get input from entry fields
@@ -35,13 +37,13 @@ def index():
         # check for if admin logged in
         doc = db.get_user(name, password)
         if doc is not None:
-            global uid
-            global user
             uid = doc['uid']
             user = f'{doc["fname"]} {doc["lname"]}'
             return render_template("quiz_settings.html", user=user)
         # login/password not found, return error message
         return render_template('login.html', error=1)
+    elif uid is not None:
+        return render_template("quiz_settings.html", user=user)
     # initial call
     else:
         return render_template('login.html')
