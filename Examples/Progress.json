@@ -1,7 +1,10 @@
 [{
     "uid": 1,
-    "Machine Learning": [100, 20],
-    "French Vocabulary": [20, 1],
+    "Machine Learning": [{"timestamp": 0, "num_questions": 20, "correct": 14},
+        {"timestamp": 1, "num_questions": 10, "correct": 10},
+        {"timestamp": 2, "num_questions": 200, "correct": 104}],
+    "French Vocabulary": [{"timestamp": 0, "num_questions": 100, "correct": 20},
+        {"timestamp": 1, "num_questions": 50, "correct": 4}],
     "badges": [
         {
 			"bid": 1, 
@@ -14,8 +17,7 @@
 },
 {
     "uid": 2,
-    "Machine Learning": [100, 50],
-    "French Vocabulary": [20, 8],
+    "French Vocabulary": [{"timestamp": 0, "num_questions": 100, "correct": 20}],
     "badges": [
         {
 			"bid": 3, 
@@ -28,8 +30,8 @@
 },
 {
     "uid": 3,
-    "Machine Learning": [100, 100],
-    "French Vocabulary": [20, 20],
+    "Machine Learning": [{"timestamp": 0, "num_questions": 20, "correct": 14},
+        {"timestamp": 1, "num_questions": 10, "correct": 10}],
     "badges": [
         {
 			"bid": 2, 

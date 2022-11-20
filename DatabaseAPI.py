@@ -29,7 +29,7 @@ class Database:
                 raise Exception(f'Cannot add new user. Missing keys: {missing_keys}')
             u_dict['pw'] = md5(u_dict['pw'].encode()).hexdigest()
         self.db.User.update_one({'uid': key}, {'$set': u_dict}, upsert=True)
-        return 0
+        return key
 
     def get_questions(self, topic: str = None, num: int = 0,
                       qid: int = 0, diff: int = None):  # -> dict | list[dict]:
@@ -67,12 +67,13 @@ class Database:
             if missing_keys:
                 raise Exception(f'Cannot add new question. Missing keys: {missing_keys}')
         self.db.Questions.update_one({'qid': key}, {'$set': q_dict}, upsert=True)
-        return 0
+        return key
 
     def get_progress(self, uid: int) -> dict:
         """Returns progress of a user as dict."""
         progress = self.db.Progress.find_one({'uid': uid})
-        return {k: progress[k] for k in set(progress.keys()).difference({'_id'})}
+        if progress is not None:
+            return {k: progress[k] for k in set(progress.keys()).difference({'_id'})}
 
     def set_progress(self, p_dict: dict) -> int:
         """Create or update progress for a given user."""
@@ -81,14 +82,15 @@ class Database:
         except KeyError:
             raise Exception('No user id was given!')
         self.db.Progress.update_one({'uid': key}, {'$set': p_dict}, upsert=True)
-        return 0
+        return key
 
     def get_badges(self, bid: int = 0):  # -> dict | list[dict]:
         """Returns a single badge as dict, if a badge id is given.
         Otherwise, returns a list of all possible badges."""
         if bid:
             doc = self.db.Badges.find_one({'bid': bid})
-            return {k: doc[k] for k in set(doc.keys()).difference({'_id'})}
+            if doc is not None:
+                return {k: doc[k] for k in set(doc.keys()).difference({'_id'})}
         docs = self.db.Badges.find({})
         badges = [{k: d[k] for k in set(d.keys()).difference({'_id'})} for d in docs]
         return badges
@@ -104,7 +106,7 @@ class Database:
             if missing_keys:
                 raise Exception(f'Cannot add new badge. Missing keys: {missing_keys}')
         self.db.Badges.update_one({'bid': key}, {'$set': b_dict}, upsert=True)
-        return 0
+        return key
 
     def get_topics(self) -> dict:
         """Return all currently available Topics from the Collection Questions."""
@@ -122,9 +124,37 @@ class Database:
             }
         return topic_number_questions
 
+    def update_progress(self, uid: int, quiz_results: dict) -> int:
+        """Updates user progress after completing a quiz."""
+        # TODO: update badges
+        p_dict = self.get_progress(uid)
+        try:
+            topic = quiz_results['topic']
+            num_questions = quiz_results['num_questions']
+            correct = quiz_results['correct']
+        except KeyError:
+            raise KeyError('Quiz results information are missing! '
+                           'Requires: topic, num_questions, correct')
+        if topic in p_dict.keys():
+            topic_list = p_dict[topic]
+            topic_list.append({'timestamp': len(topic_list), 'num_questions': num_questions,
+                               'correct': correct})
+        else:
+            topic_list = [{'timestamp': 0, 'num_questions': num_questions, 'correct': correct}]
+        p_dict[topic] = topic_list
+        self.set_progress(p_dict)
+        return 0
+
     def get_user_statistics(self, uid: int):
-        # TODO: compute user evaluation
-        pass
+        """Returns y axes for plotting. User progress measured in percentage of correct answers
+        per quiz."""
+        p_dict = self.get_progress(uid)
+        user_topics = set(p_dict.keys()).difference({'uid', 'badges'})
+        y_axes = dict()
+        for topic in user_topics:
+            y = [round(d['correct'] / d['num_questions'] * 100, 2) for d in p_dict[topic]]
+            y_axes[topic] = y
+        return y_axes
 
 
 if __name__ == '__main__':
@@ -144,18 +174,19 @@ if __name__ == '__main__':
     print(f'Got only 5 ML Questions: {len(qs) == 5}')
     print(f'Let`s look these 5 random questions: {qs}')
 
-    #db.set_question({'topic': 'Machine Learning', 'question': 'Yo test',
-    #                 'answers': ['a', 'b'],
-    #                 'correct_index': 0, 'difficulty': 0})
-    #last_question_id = db.db.Questions.find().sort('qid', -1).limit(1)[0]['qid']
-    #print(f'Create new dummy question: {db.get_questions(qid=last_question_id)}')
-   # db.set_question({'qid': last_question_id, 'answered': [100, 78]})
-    #print(f'And modify it: {db.get_questions(qid=last_question_id)}')
+    db.set_question({'topic': 'Machine Learning', 'question': 'Yo test',
+                     'answers': ['a', 'b'],
+                     'correct_index': 0, 'difficulty': 0})
+    last_question_id = db.db.Questions.find().sort('qid', -1).limit(1)[0]['qid']
+    print(f'Create new dummy question: {db.get_questions(qid=last_question_id)}')
+    db.set_question({'qid': last_question_id, 'answered': [100, 78]})
+    print(f'And modify it: {db.get_questions(qid=last_question_id)}')
 
     print('\nProgress testing:')
     pg = db.get_progress(1)
     print(f'Progress from user with id 1: {pg}')
-    db.set_progress({'uid': 1, 'Machine Learning': [110, 25]})
+    db.set_progress({'uid': 1,
+                     'Machine Learning': [{"timestamp": 0, "num_questions": 20, "correct": 14}]})
     print(f'Modify user progress: {db.get_progress(1)}')
 
     print('\nBadge testing:')
@@ -171,3 +202,10 @@ if __name__ == '__main__':
     print('\nGet Topic Testing:')
     get_topics = db.get_topics()
     print("The Topics and it's counts", get_topics)
+
+    print('\nUpdate progress testing:')
+    db.update_progress(1, {'topic': 'Machine Learning', 'num_questions': 666, 'correct': 444})
+    print(f'Update user progress after quiz: {db.get_progress(1)}')
+
+    print('\nUser statistic testing:')
+    print(f'Show progress y axes: {db.get_user_statistics(1)}')
