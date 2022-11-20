@@ -1,4 +1,4 @@
-<!-- Do not change anything ifyou have an automatic Code beautifier enabled. Javascript inside the Script tag in a Jinja Template can be interpreted wrongly and break the Code as the correct spacing ("{{" instead of "{ {") is important for the Jinja-Value Tags-->
+{#   Do not change anything if you have an automatic Code beautifier enabled. Javascript inside the Script tag in a Jinja Template can be interpreted wrongly and break the Code as the correct spacing ("{{" instead of "{ {") is important for the Jinja-Value Tags #}
 
 {% extends "base.html" %}
 
@@ -42,7 +42,8 @@ See how well you're doing and what Badges you've earned!
                 },
                 options: {
                     responsive: false,
-                       
+					scales: {yAxes: [{scaleLabel: {display: true,labelString: 'Percentage of correct Answers for a Quiz'}}]
+					}      
                 }
                 });
             </script>
