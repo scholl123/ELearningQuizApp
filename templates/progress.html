@@ -1,3 +1,5 @@
+<!-- Do not change anything ifyou have an automatic Code beautifier enabled. Javascript inside the Script tag in a Jinja Template can be interpreted wrongly and break the Code as the correct spacing ("{{" instead of "{ {") is important for the Jinja-Value Tags-->
+
 {% extends "base.html" %}
 
 {% block info %}
@@ -6,31 +8,45 @@ See how well you're doing and what Badges you've earned!
 
 {% block main %}
 
-{% set data = progress_data %}
+
 {% set b_data = badge_data %}
+{% set labels = labels %}
+{% set values = values %}
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-12">
             <h1>Your Progress</h1>
-            <div class=" justify-content-center>">
-                <div class="table-responsive container-fluid">
-                    <table class="table-striped mx-auto w-auto" , style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>Topic Name</th>
-                                <th>Score</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for topic_key in data.keys() %}
-                            <TR>
-                                <TD class="c1">{{topic_key}}</TD>
-                                <TD class="c2">You got {{data[topic_key][1]}} out of {{data[topic_key][0]}}</TD>
-                            </TR>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+			<div class=" justify-content-center>">
+            <canvas id="lineChart" width="900" height="400"></canvas>
+
+            <script>
+                var ctx = document.getElementById("lineChart").getContext("2d");
+                var lineChart = new Chart(ctx, {
+                    type: "line",
+                    data: {
+                        labels: {{ labels| tojson }},
+                datasets: [
+
+                    {% for v in values.keys() %}
+                {% set title = v %}
+                {% set da = values[v][0] %}
+				{% set curr_color = values[v][1] %}
+                {
+                    label: {{title | safe}},
+                    data: {{da | safe}},
+					borderColor: {{curr_color | safe}},
+                    fill: false,
+                    lineTension: 0.1
+                }, {% endfor %}            
+					]
+                },
+                options: {
+                    responsive: false,
+                       
+                }
+                });
+            </script>
+
             </div>
         </div>
     </div>

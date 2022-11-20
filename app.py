@@ -5,6 +5,10 @@ from hashlib import md5
 import os
 import openpyxl
 import pandas as pd
+import seaborn as sns
+
+
+
 import file_handling
 
 UPLOAD_FOLDER = 'uploads/'
@@ -51,7 +55,8 @@ def index():
 
 @app.route("/progress")
 def show_progress():
-    user_progress_data = db.get_progress(1)
+    user_progress_data = db.get_progress(uid)
+    
     badges = []  
     for b in user_progress_data["badges"]:
         count = b["count"] if b["count"] != -1 else 0
@@ -61,9 +66,15 @@ def show_progress():
             badge_info["target"] = 1
             
         badges.append([badge_info, count, obtained])
-    del user_progress_data["uid"]
-    del user_progress_data["badges"]
-    return render_template("progress.html", progress_data=user_progress_data, badge_data=badges)
+
+    data = db.get_user_statistics(uid)
+    palette = (sns.color_palette("colorblind", len(data.keys()))).as_hex()
+    labels = [i for i in range(0,max(len(x) for x in list(data.values())))]
+    data_dict = dict()
+    for key in data.keys():
+        data_dict["'" +key+"'"] = (data[key], "'"+str(palette.pop())+"'")
+
+    return render_template("progress.html", badge_data=badges, labels=labels, values=data_dict)
 
 
 @app.route("/show_all_topics")
