@@ -23,6 +23,8 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 @app.route("/", methods=['GET', 'POST'])
 def index():
     """root directory of the web interface. Login interface"""
+    if g.user is None:
+        return redirect(url_for('auth.login'))
     return render_template("quiz_settings.html")
 
 
