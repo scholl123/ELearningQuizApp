@@ -16,9 +16,9 @@ class Database:
         }
         client = MongoClient(host, port=port)
         self.db = client.ELearnApp
-        self.no_db = True
+        self.no_db = no_db
 
-    def get_user_2(self, login: str, pw: str):
+    def get_user(self, login: str, pw: str):
         """Return true if user:pw exists in db"""
         pw_hash = md5(pw.encode()).hexdigest()
         return self.db.User.find_one({'login': login, 'pw': pw_hash})
@@ -28,10 +28,9 @@ class Database:
             return self.admin
         return self.db.User.find_one({'uid': uid})
 
-    def get_user(self, login: str, pw: str) -> dict:
+    def get_user_data(self, login: str, pw: str) -> dict:
         """Get user information as dict. But not login and pw."""
-        pw_hash = md5(pw.encode()).hexdigest()
-        doc = self.db.User.find_one({'login': login, 'pw': pw_hash})
+        doc = self.get_user(login, pw)
         if doc is not None:
             return {k: doc[k] for k in {'uid', 'fname', 'lname'}}
 
@@ -179,10 +178,10 @@ if __name__ == '__main__':
     # do some testing
     db = Database()
     print('User testing:')
-    user = db.get_user('mm1', 'mm1')
+    user = db.get_user_data('mm1', 'mm1')
     print(f'User information: {user}')
     db.set_user({'uid': 1, 'fname': 'Maxi'})
-    user = db.get_user('mm1', 'mm1')
+    user = db.get_user_data('mm1', 'mm1')
     print(f'Update user name: {user}')
 
     print('\nQuestion testing:')
@@ -228,4 +227,3 @@ if __name__ == '__main__':
     print('\nUser statistic testing:')
     print(f'Show progress y axes: {db.get_user_statistics(1)}')
 
-    print(db.get_user_2("mm1", "mm1"))

@@ -47,7 +47,7 @@ def login():
 
         db = Database()
         error = None
-        user = db.get_user_2(username, password)
+        user = db.get_user(username, password)
 
         if user is None:
             error = "Username or password wrong"
