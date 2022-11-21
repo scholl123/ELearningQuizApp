@@ -4,7 +4,7 @@ from flask import Blueprint, flash, g, redirect, render_template, request, sessi
 from werkzeug.security import check_password_hash, generate_password_hash
 from DatabaseAPI import Database
 
-auth = Blueprint('auth', __name__, url_prefix='/auth')
+auth = Blueprint('auth', __name__, url_prefix='/auth', static_folder='static')
 
 
 # @bp.route('/register', methods=('GET', 'POST'))
