@@ -12,6 +12,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 
   background-color: #F7EDE2;
+
 }
 
 #wrapper {
@@ -19,11 +20,12 @@ body {
   min-height: 85vh;
 }
 
+
 #main {
   background-color: white;
   border: rgb(152, 152, 152) solid 1px;
   min-height: 85vh;
-  max-height: 100vh;
+  padding-bottom: 50px;
   margin: 20px;
   width: 95vw;
 }
@@ -86,4 +88,8 @@ header li a {
   outline: 1px solid black;
   margin-left: 10px;
   padding: 2%;
+}
+
+.instruction-image {
+  border: solid black 1px;
 }

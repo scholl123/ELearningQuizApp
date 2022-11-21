@@ -1,38 +1,81 @@
 {% extends "base.html" %}
 
 {% block info %}
-    Upload a new Topic for your Quizzes!
+Upload a new Topic for your Quizzes!
 {% endblock info %}
 
 
 {% block main %}
-    <form class="form-horizontal" action="/uploaded" method="POST" enctype="multipart/form-data">
-        <div class="form-group">
-            <label class="control-label col-sm-2" for="topic">Topic Title: </label>
-            <div class="col-sm-4">
-                <input type="text" class="form-control" id="topic" name="topic" placeholder="Enter topic">
+<form class="form-horizontal" action="/uploaded" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="topic">Topic Title: </label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="topic" name="topic" placeholder="Enter topic">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="file" class="control-label col-sm-2">Choose file: </label>
+        <input type="file" name="file" id="file">
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <input type="submit" class="btn btn-default" value="Submit">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-5">
+            <h1>How to use it :</h1>
+            <div class="container">
+                <h3>You can use our <a href="{{ url_for('static',
+                            filename='upload_instructions/quiz_template.xlsx') }}" download="template_quiz.xlsx"
+                        style="font-family:courier;">Template!</a></h2>
+                    <hr />
+
+                    <h4>Not sure how to fill out our template? Have a look at our examples:</h4>
+                    <p>
+                        <img src="{{ url_for('static',  filename  ='upload_instructions/single_answer_question.png') }}"
+                            alt="Example_single_question" class="instruction-image">
+                    </p>
+                    <p>
+                        <img src="{{ url_for('static',  filename='upload_instructions/mc_answer_question.png') }}"
+                            alt="Example_single_question" class="instruction-image">
+                    </p>
+                    <ul>
+                        <li>
+                            <h5>The first two columns <strong>"Question" and "Answer" are mandatory</strong>!</h5>
+                        </li>
+                        <li>
+                            <h5>if have not entered an alternative answer, this question will give you a <strong>Prompt
+                                    field</strong>
+                                where you can enter your answer to this question.</h5>
+                        </li>
+                        <li>
+                            <h5>If you enter alternative answers for a question, it will become a <strong>Multiple
+                                    Choice
+                                    Question</strong>
+                                in a Quiz. This means that you will have to choose the correct answer from this choices.
+                            </h5>
+                        </li>
+                        <li>
+                            <h5>Alternative answers must be <strong>seperated by comma</strong></h5>
+                        </li>
+                        <li>
+                            <h5>There are <strong>3 choices for Difficulty</strong>: Easy, Medium and Hard! If you do
+                                not
+                                set a difficulty,
+                                it will be automatically set to Medium.</h5>
+                        </li>
+                    </ul>
+                    <h3>After filling out your Table, simply save it and upload it!</h3>
+
             </div>
         </div>
-
-        <div class="form-group">
-            <label for="file" class="control-label col-sm-2">Choose file: </label>
-            <input type="file" name="file" id="file">
-        </div>
-
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <input type="submit" class="btn btn-default" value="Submit">
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-sm-2"></div>
-            <div class="col-sm-4">
-                <h4>How to use it :</h4>
-                <p> Please only upload Excel or CSV.
-            </div>
-        </div>
-    </form>
+    </div>
+</form>
 
 
 {% endblock main %}
