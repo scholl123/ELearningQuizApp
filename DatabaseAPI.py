@@ -10,6 +10,14 @@ class Database:
         client = MongoClient(host, port=port)
         self.db = client.ELearnApp
 
+    def get_user_2(self, login: str, pw: str):
+        """Return true if user:pw exists in db"""
+        pw_hash = md5(pw.encode()).hexdigest()
+        return self.db.User.find_one({'login': login, 'pw': pw_hash})
+
+    def get_user_by_id(self, uid):
+        return self.db.User.find_one({'uid': uid})
+
     def get_user(self, login: str, pw: str) -> dict:
         """Get user information as dict. But not login and pw."""
         pw_hash = md5(pw.encode()).hexdigest()
@@ -209,3 +217,5 @@ if __name__ == '__main__':
 
     print('\nUser statistic testing:')
     print(f'Show progress y axes: {db.get_user_statistics(1)}')
+
+    print(db.get_user_2("mm1", "mm1"))
