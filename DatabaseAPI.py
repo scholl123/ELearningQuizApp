@@ -4,11 +4,19 @@ from hashlib import md5
 
 class Database:
 
-    def __init__(self, host: str = 'localhost', port: int = 27017):
+    def __init__(self, host: str = 'localhost', port: int = 27017, no_db=False):
         """Initiate database connection with given host and port.
         If none is given, use default settings on mongoDB installation."""
+        self.admin = {
+            "uid": 0,
+            "fname": "admin",
+            "lname": "admin",
+            "login": "admin",
+            "pw": f"{md5('admin'.encode()).hexdigest()}"
+        }
         client = MongoClient(host, port=port)
         self.db = client.ELearnApp
+        self.no_db = True
 
     def get_user_2(self, login: str, pw: str):
         """Return true if user:pw exists in db"""
@@ -16,6 +24,8 @@ class Database:
         return self.db.User.find_one({'login': login, 'pw': pw_hash})
 
     def get_user_by_id(self, uid):
+        if self.no_db:
+            return self.admin
         return self.db.User.find_one({'uid': uid})
 
     def get_user(self, login: str, pw: str) -> dict:

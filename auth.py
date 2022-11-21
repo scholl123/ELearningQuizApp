@@ -1,4 +1,5 @@
 import functools
+from hashlib import md5
 
 from flask import Blueprint, flash, g, redirect, render_template, request, session, url_for
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -38,9 +39,16 @@ def login():
         username = request.form['username']
         password = request.form['password']
 
+        # allow login w/o db connection
+        if (username, password) == ("admin", "admin"):
+            session.clear()
+            session['user_id'] = 0
+            return redirect(url_for('index'))
+
         db = Database()
         error = None
         user = db.get_user_2(username, password)
+
         if user is None:
             error = "Username or password wrong"
 
@@ -60,10 +68,18 @@ def load_logged_in_user():
     user_id = session.get('user_id')
     db = Database()
 
+    if user_id == 0:
+        g.user = {
+            "uid": 0,
+            "fname": "admin",
+            "lname": "admin",
+            "login": "admin",
+            "pw": f"{md5('admin'.encode()).hexdigest()}"
+        }
+
     if user_id is None:
         g.user = None
     else:
-        pass
         g.user = db.get_user_by_id(user_id)
 
 

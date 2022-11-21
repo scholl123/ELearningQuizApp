@@ -1,46 +1,38 @@
 {% extends "base.html" %}
 
 {% block info %}
-Upload a new Topic for your Quizzes!
+    Upload a new Topic for your Quizzes!
 {% endblock info %}
 
 
 {% block main %}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-xs-12">
-            <h1> Upload a new Topic:</h1>
+    <form class="form-horizontal" action="/uploaded" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="topic">Topic Title</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="topic" name="topic" placeholder="Enter topic">
+            </div>
         </div>
-        <div class="container">
-            <form action="/uploaded" method="POST" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="text">Name of Topic:</label>
-                    <input type="text" class="form-control" id="topic_name" name="topic_name" placeholder="Enter Name">
-                </div>
-                <hr>
-                <div class="box">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <span class="control-fileupload">
-                                <label for="the_file" name="label_file" class="text-left">Please choose a file on your
-                                    computer.</label>
-                                <input type="file" name="the_file" id="the_file">
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="container">
-                    <input type="submit" class="btn btn-primary btn-block" value="Submit">
-                </div>
-            </form>
-            <hr>
-            <h4>How to use it :</h4>
-            <p> Please only upload Excel or CSV.
-            </p>
-            <hr />
+
+        <div class="form-group">
+            <label for="file" class="control-label col-sm-2">Choose file: </label>
+            <input type="file" name="file" id="file">
         </div>
-    </div>
-</div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="submit" class="btn btn-default" value="Submit">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-4">
+                <h4>How to use it :</h4>
+                <p> Please only upload Excel or CSV.
+            </div>
+        </div>
+    </form>
+
 
 {% endblock main %}

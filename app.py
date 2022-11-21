@@ -5,7 +5,6 @@ import seaborn as sns
 from flask import Flask, render_template, request, redirect, url_for, g
 from werkzeug.utils import secure_filename
 
-
 import file_handling
 from DatabaseAPI import Database
 
@@ -83,7 +82,7 @@ def show_upload_page():
 @auth.login_required
 def show_uploaded_page():
     if request.method == 'POST':
-        file = request.files['the_file']
+        file = request.files['file']
         if file.filename == '':
             return redirect(request.url)
 
