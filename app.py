@@ -2,7 +2,7 @@ import os
 import openpyxl
 import pandas as pd
 import seaborn as sns
-from flask import Flask, render_template, request, redirect, url_for, g
+from flask import Flask, render_template, request, redirect, url_for, g, session
 from werkzeug.utils import secure_filename
 
 import file_handling
@@ -24,7 +24,8 @@ def index():
     """root directory of the web interface. Login interface"""
     if g.user is None:
         return redirect(url_for('auth.login'))
-    return render_template("quiz_settings.html")
+    topics = db.get_topics()
+    return render_template("quiz_settings.html", topics=topics)
 
 
 @app.route("/progress")
@@ -101,28 +102,57 @@ def show_uploaded_page():
         return render_template("uploaded.html", notice=0)
 
 
-@app.route("/result")
-@auth.login_required
-def show_results():
-    values = [(15, 19), (10, 10), (4, 6), (1, 3)]
-    return render_template("show_quiz_result.html", result=values)
-
-
-# test reading form input
 @app.route("/quiz", methods=['POST', 'GET'])
 @auth.login_required
-def quiz():
-    if request.method == 'GET':
-        return "Something wrong"
-    elif request.method == 'POST':
-        form_data = request.form
-        return render_template("multiple_choice.html", form_data=form_data)
+def quiz_setup():
+    settings = dict()
+    for setting in ['topic', 'num_questions', 'difficulty']:
+        settings[setting] = request.form.get(setting)
+        try:
+            if settings[setting].isdigit():
+                settings[setting] = int(settings[setting])
+        except AttributeError:
+            return render_template("quiz_settings.html", topics=db.get_topics(), error=1)
+    session['settings'] = settings
+    session['q_index'] = 0
+    session['correct'] = 0
+    session['quiz'] = db.get_questions(topic=settings['topic'], diff=settings['difficulty'],
+                                       num=settings['num_questions'])
+    session['settings']['num_questions'] = len(session['quiz'])
+    return render_template("quiz_question.html", question=session['quiz'][session['q_index']],
+                           answered=0)
 
 
-@app.route("/question")
+@app.route("/question", methods=['POST', 'GET'])
 @auth.login_required
 def question():
-    return render_template("quiz_question.html")
+    if request.method == 'GET':
+        session['q_index'] += 1
+        if len(session['quiz']) == session['q_index']:
+            values = [(session['correct'], len(session['quiz'])), (10, 10), (4, 6), (1, 3)]
+            results = session['settings']
+            results['correct'] = session['correct']
+            db.update_progress(session['user_id'], results)
+            return render_template("show_quiz_result.html", result=values)
+        return render_template("quiz_question.html", question=session['quiz'][session['q_index']],
+                               answered=0)
+    else:
+        answer_index = request.form.get('answer')
+        if len(session['quiz'][session['q_index']]['answers']) > 1:
+            try:
+                answer_index = int(answer_index)
+                if answer_index == session['quiz'][session['q_index']]['correct_index']:
+                    session['correct'] += 1
+            except ValueError:
+                return render_template("quiz_question.html",
+                                       question=session['quiz'][session['q_index']],
+                                       answered=0, error=1)
+        else:
+            if answer_index == session['quiz'][session['q_index']]['answers'][0]:
+                session['correct'] += 1
+        return render_template("quiz_question.html", question=session['quiz'][session['q_index']],
+                               answered=1, answer_index=answer_index)
+
 
 app.secret_key = 'secret example key'
 
@@ -132,7 +162,7 @@ if __name__ == '__main__':
 
     app.config['SESSION_TYPE'] = 'filesystem'
 
-    from . import auth
+    import auth
 
     app.register_blueprint(auth.auth)
     print("hello")

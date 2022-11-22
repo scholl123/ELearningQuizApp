@@ -56,7 +56,8 @@ class Database:
         If a specific question id is given, return only dict of that question."""
         if qid:
             doc = self.db.Questions.find_one({'qid': qid})
-            return {k: doc[k] for k in set(doc.keys()).difference({'_id'})}
+            if doc is not None:
+                return {k: doc[k] for k in set(doc.keys()).difference({'_id'})}
         if diff is not None:
             pipeline = [{'$match': {'topic': topic, 'difficulty': diff}}]
         else:
