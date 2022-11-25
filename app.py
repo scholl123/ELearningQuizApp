@@ -138,18 +138,25 @@ def question():
                                answered=0)
     else:
         answer_index = request.form.get('answer')
-        if len(session['quiz'][session['q_index']]['answers']) > 1:
+        question_asked = session['quiz'][session['q_index']]
+        answered = [question_asked['answered'][0] + 1, question_asked['answered'][1]]
+        if len(question_asked['answers']) > 1:
             try:
                 answer_index = int(answer_index)
-                if answer_index == session['quiz'][session['q_index']]['correct_index']:
+                if answer_index == question_asked['correct_index']:
                     session['correct'] += 1
+                else:
+                    answered[1] += 1
             except ValueError:
                 return render_template("quiz_question.html",
                                        question=session['quiz'][session['q_index']],
                                        answered=0, error=1)
         else:
-            if answer_index == session['quiz'][session['q_index']]['answers'][0]:
+            if answer_index == question_asked['answers'][0]:
                 session['correct'] += 1
+            else:
+                answered[1] += 1
+        db.set_question({'qid': question_asked['qid'], 'answered': answered})
         return render_template("quiz_question.html", question=session['quiz'][session['q_index']],
                                answered=1, answer_index=answer_index)
 
