@@ -63,19 +63,24 @@
                 <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
                 <!-- https://fontawesome.com/v4/icons/ -->
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
-                    <ul class="nav navbar-nav side-nav">
+                    <ul class="nav navbar-nav side-nav ">
                         <li>
-                            <a href="{{ url_for('index') }}"><i class="fa fa-fw fa-rocket"></i> Start</a>
+                            <a href="{{ url_for('index') }} " style="color: rgb(54, 54, 54)"><i
+                                    class="fa fa-fw fa-rocket"></i>
+                                Start</a>
                         </li>
                         <li>
-                            <a href="{{ url_for('show_progress') }}"><i class="fa fa-fw fa-bar-chart"></i> Progress</a>
+                            <a href="{{ url_for('show_progress') }}" style="color:rgb(54, 54, 54)"><i
+                                    class="fa fa-fw fa-bar-chart"></i> Progress</a>
                         </li>
                         <li>
-                            <a href="{{ url_for('show_all_topics') }}"><i class="fa fa-fw fa fa-question-circle"></i>
+                            <a href="{{ url_for('show_all_topics') }}" style="color:rgb(54, 54, 54)"><i
+                                    class="fa fa-fw fa fa-question-circle"></i>
                                 Show all Topics</a>
                         </li>
                         <li>
-                            <a href="{{ url_for('show_upload_page') }}"><i class="fa fa-fw fa fa-upload"></i> Upload new
+                            <a href="{{ url_for('show_upload_page') }}" style="color:rgb(54, 54, 54)"><i
+                                    class="fa fa-fw fa fa-upload"></i> Upload new
                                 Topic</a>
                         </li>
                     </ul>
