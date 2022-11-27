@@ -42,13 +42,6 @@
                             <input id="submit" type="submit" class="btn btn-primary btn-block" value="Confirm">
                         </div>
                     </div>
-                    {% with messages = get_flashed_messages() %}
-                        {% if messages %}
-                            {% for message in messages %}
-                                <h3 style="text-align: center; color: Red">{{ message }}</h3>
-                            {% endfor %}
-                        {% endif %}
-                    {% endwith %}
                 </form>
             </div>
             <hr/>

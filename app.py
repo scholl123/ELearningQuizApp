@@ -161,7 +161,6 @@ def question():
                 session['correct'] += 1
             else:
                 success = False
-                flash("Wrong answer")
                 answered[1] += 1
         db.set_question({'qid': current_question['qid'], 'answered': answered})
         return render_template("quiz_question.html", question=current_question,
