@@ -37,11 +37,11 @@
                             <form action="/question" method="POST">
                                 {% if question['answers']|length > 1 %}
                                     {% for answer in question['answers'] %}
-                                        <label for="answer" class="element-animation1 btn btn-lg btn-danger btn-block">
-                                <span class="btn-label">
-                                    <i class="glyphicon glyphicon-chevron-right"></i>
-                                </span>
-                                            <input id="answer" type="radio" name="answer" value="{{ loop.index0 }}">
+                                        <label for="answer-{{ loop.index0 }}" class="element-animation{{ loop.index0 }} btn btn-lg btn-danger btn-block">
+                                            <span class="btn-label">
+                                                <i class="glyphicon glyphicon-chevron-right"></i>
+                                            </span>
+                                            <input id="answer-{{ loop.index0 }}" type="radio" name="answer" value="{{ loop.index0 }}">
                                             {{ answer }}
                                         </label>
                                     {% endfor %}
