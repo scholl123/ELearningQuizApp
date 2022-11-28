@@ -8,9 +8,8 @@ See one Topic:
 {% block main %}
 {%set curr_topic = topic%}
 {%set questions = questions%}
-<!--{'topic': 'French Vocabulary', 'correct_index': 0, 'difficulty': 1, 'qid': 11, 'question': 'When was Mahatma Gandhi born?', 'answers': ['October 2, 1869', 'December 15, 1872', 'July 18, 1918', 'January 15, 1929'], 'answered': [548, 456]} -->
-<div class="container-fluid">
 
+<div class="container-fluid">
     <div class="row">
         <div class="col-xs-12">
             <h1> {{curr_topic}}</h1>
@@ -29,6 +28,7 @@ See one Topic:
                     </thead>
                     <tbody>
                         {%for q in questions %}
+                        {%set id = q["qid"]%}
                         <tr>
                             <td>{{q['question']}}</td>
                             <td>
@@ -40,8 +40,57 @@ See one Topic:
 
                             </td>
                             <td>{{q["difficulty"]}}</td>
-                            <td><button type="button" class="btn">Edit</button></td>
+                            <td> <button type="button" class="btn btn-info btn-lg" data-toggle="modal"
+                                    data-target="#{{ id }}">Edit Question</button>
+                                <!--<button type="button" class="btn">Edit</button> -->
+                            </td>
                         </tr>
+                        <!-- Modal -->
+                        <div id="{{ id }}" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Header</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="/show_one_topic" method="POST">
+                                            <input type="hidden" id="curr_quest" name="curr_quest" value="{{ q }}">
+                                            <input type="hidden" id="topicId" name="topicId" value="{{ curr_topic }}">
+
+                                            <label for="question">Question</label><br>
+                                            <input class="form-control" type="text" id="question" name="question"
+                                                value="{{q['question']}}"><br>
+
+                                            <label for="correct_answer"> Correct Answer</label><br>
+                                            {%if q['answers']|length == 1%}
+                                            <input class="form-control" type="text" id="correct_answer"
+                                                name="correct_answer" value="{{q['answers'][0]}}">
+                                            {%else%}
+                                            <input class="form-control" type="text" id="correct_answer"
+                                                name="correct_answer" value="{{q['answers'][q['correct_index']]}}">
+                                            {%endif%}
+
+                                            <input type="radio" id="easy" name="difficulty" value="0">
+                                            <label for="easy">Easy</label><br>
+                                            <input type="radio" id="medium" name="difficulty" value="1" checked>
+                                            <label for="medium">Medium</label><br>
+                                            <input type="radio" id="hard" name="difficulty" value="2">
+                                            <label for="hard">Hard</label>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="submit" class="btn btn btn-danger"
+                                            value="Question will be immediatly changed to this values!">
+                                    </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+
+
                         {%endfor%}
                     </tbody>
 

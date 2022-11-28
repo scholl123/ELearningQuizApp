@@ -8,6 +8,7 @@ import auth
 from utility import get_difficulty_string
 import file_handling
 from DatabaseAPI import Database
+import ast
 
 UPLOAD_FOLDER = 'uploads/'
 
@@ -64,12 +65,21 @@ def show_all_topics():
 @auth.login_required
 def show_single_topic():
     if request.method == 'POST':
+        if request.form.get("question"):
+            curr_question = ast.literal_eval(request.form.get("curr_quest"))
+            curr_question["question"] = request.form.get("question")
+            curr_question["answers"][curr_question["correct_index"]] = request.form.get("correct_answer")
+            curr_question["difficulty"] = request.form.get("difficulty")
+            db.set_question(curr_question)
         difficulty_levels = {0: "easy", 1: "medium", 2: "hard"}
         text = request.form.get("topicId")
         questions = db.get_questions(text)
         for quest in questions:
             quest["difficulty"] = difficulty_levels[quest["difficulty"]]
+                
         return render_template("show_one_topic.html", topic=text, questions=questions)
+        
+
 
 
 @app.route("/upload_new_topic")
