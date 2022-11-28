@@ -128,19 +128,19 @@ class Database:
 
     def get_topics(self) -> dict:
         """Return all currently available Topics from the Collection Questions."""
-        all_topics = self.db.Questions.distinct("topic")
-        topic_number_questions = dict()
-        for top in all_topics:
-            topic_number_questions[top] = {
-                "num_questions": len(self.get_questions(top)),
+        topics = self.db.Questions.distinct("topic")
+        topic_num_questions = dict()
+        for topic in topics:
+            topic_num_questions[topic] = {
+                "num_questions": len(self.get_questions(topic)),
                 "per_easy_questions": round(
-                    len(self.get_questions(top, diff=0)) / len(self.get_questions(top)), 2) * 100,
+                    len(self.get_questions(topic, diff=0)) / len(self.get_questions(topic)), 2) * 100,
                 "per_medium_questions": round(
-                    len(self.get_questions(top, diff=1)) / len(self.get_questions(top)), 2) * 100,
+                    len(self.get_questions(topic, diff=1)) / len(self.get_questions(topic)), 2) * 100,
                 "per_hard_questions": round(
-                    len(self.get_questions(top, diff=2)) / len(self.get_questions(top)), 2) * 100
+                    len(self.get_questions(topic, diff=2)) / len(self.get_questions(topic)), 2) * 100
             }
-        return topic_number_questions
+        return topic_num_questions
 
     def update_progress(self, uid: int, quiz_results: dict) -> int:
         """Updates user progress after completing a quiz."""

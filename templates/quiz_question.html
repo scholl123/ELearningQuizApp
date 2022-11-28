@@ -2,55 +2,59 @@
 {% block info %}
     Answer all questions!
 {% endblock info %}
+
 {% block main %}
     <div class="container-fluid">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3>{{ question['question'] }}</h3>
+                    <h3>Q. {{ question['question'] }}</h3>
                 </div>
                 <div class="modal-body">
                     <div class="col-xs-3 5"></div>
                     <div class="quiz" id="quiz">
-                        {% if answered == 1 %}
-                        <form action="/question" method="GET">
-                            <div class=" row">
-                                <div class="col-xs-12  text-center">
-                                    <h4>Correct Answer:</h4>
-                                    <h3>{{question['answers'][question['correct_index']]}}</h3>
-                                    </br>
-                                    <h4>Your Answer:</h4>
-                                    {% if answer_index is integer %}
-                                        <h3>{{question['answers'][answer_index]}}</h3>
-                                    {% else %}
-                                        <h3>{{answer_index}}</h3>
-                                    {% endif %}
+                        {% if show_answer %}
+                            <form action="/question" method="GET">
+                                <div class="row">
+                                    <div class="col-xs-12  text-center">
+
+                                        <h4>Correct Answer:</h4>
+                                        <h3>{{ question['answers'][question['correct_index']] }}</h3>
+                                        </br>
+                                        <div class="{{ 'alert-success' if success else 'alert-danger' }} modal-body">
+                                        <h4>Your Answer:</h4>
+                                        {% if answer is integer %}
+                                            <h3>{{ question['answers'][answer] }}</h3>
+                                        {% else %}
+                                            <h3>{{ answer }}</h3>
+                                        {% endif %}
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <input id="submit" type="submit" class="btn btn-lg btn-block" value="Next question">
-                        </form>
+                                <input id="submit" type="submit" class="btn btn-lg btn-block" value="Next question">
+                            </form>
                         {% else %}
-                        <form action="/question" method="POST">
-                            {% if question['answers']|length > 1 %}
-                                {% for answer in question['answers'] %}
-                                    <label for="answer" class="element-animation1 btn btn-lg btn-danger btn-block">
-                                <span class="btn-label">
-                                    <i class="glyphicon glyphicon-chevron-right"></i>
-                                </span>
-                                        <input id="answer" type="radio" name="answer" value="{{loop.index0}}">
-                                        {{ answer }}
-                                    </label>
-                                {% endfor %}
-                            {% else %}
-                            <div class=" row">
-                                <div class="col-xs-12  text-center">
-                                    <h4>Your Answer:</h4>
-                                    <input type="text" id="answer" name="answer" size="50">
-                                </div>
-                            </div>
-                            {% endif %}
-                            <input id="submit" type="submit" class="btn btn-lg btn-block" value="Submit">
-                        </form>
+                            <form action="/question" method="POST">
+                                {% if question['answers']|length > 1 %}
+                                    {% for answer in question['answers'] %}
+                                        <label for="answer-{{ loop.index0 }}" class="element-animation{{ loop.index0 }} btn btn-lg btn-danger btn-block">
+                                            <span class="btn-label">
+                                                <i class="glyphicon glyphicon-chevron-right"></i>
+                                            </span>
+                                            <input id="answer-{{ loop.index0 }}" type="radio" name="answer" value="{{ loop.index0 }}">
+                                            {{ answer }}
+                                        </label>
+                                    {% endfor %}
+                                {% else %}
+                                    <div class=" row">
+                                        <div class="col-xs-12  text-center">
+                                            <h4>Your Answer:</h4>
+                                            <input type="text" id="answer" name="answer" size="50">
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                <input id="submit" type="submit" class="btn btn-lg btn-block" value="Submit">
+                            </form>
                         {% endif %}
                     </div>
                 </div>

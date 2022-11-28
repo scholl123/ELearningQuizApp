@@ -1,14 +1,13 @@
 import os
-import openpyxl
-import pandas as pd
+
 import seaborn as sns
-from flask import Flask, render_template, request, redirect, url_for, g, session
+from flask import Flask, render_template, request, redirect, url_for, g, session, flash
 from werkzeug.utils import secure_filename
 
+import auth
+from utility import get_difficulty_string
 import file_handling
 from DatabaseAPI import Database
-
-import auth
 
 UPLOAD_FOLDER = 'uploads/'
 
@@ -46,15 +45,15 @@ def show_progress():
 
     data = db.get_user_statistics(uid)
     palette = (sns.color_palette("colorblind", len(data.keys()))).as_hex()
-    labels = [i for i in range(0,max(len(x) for x in list(data.values())))]
+    labels = [i for i in range(0, max(len(x) for x in list(data.values())))]
     data_dict = dict()
     for key in data.keys():
-        data_dict["'" +key+"'"] = (data[key], "'"+str(palette.pop())+"'")
+        data_dict["'" + key + "'"] = (data[key], "'" + str(palette.pop()) + "'")
 
     return render_template("progress.html", badge_data=badges, labels=labels, values=data_dict)
 
 
-@app.route("/show_all_topics")
+@app.route("/topics")
 @auth.login_required
 def show_all_topics():
     topics = db.get_topics()
@@ -105,22 +104,27 @@ def show_uploaded_page():
 @app.route("/quiz", methods=['POST', 'GET'])
 @auth.login_required
 def quiz_setup():
-    settings = dict()
-    for setting in ['topic', 'num_questions', 'difficulty']:
-        settings[setting] = request.form.get(setting)
-        try:
-            if settings[setting].isdigit():
-                settings[setting] = int(settings[setting])
-        except AttributeError:
-            return render_template("quiz_settings.html", topics=db.get_topics(), error=1)
-    session['settings'] = settings
     session['q_index'] = 0
     session['correct'] = 0
-    session['quiz'] = db.get_questions(topic=settings['topic'], diff=settings['difficulty'],
-                                       num=settings['num_questions'])
-    session['settings']['num_questions'] = len(session['quiz'])
-    return render_template("quiz_question.html", question=session['quiz'][session['q_index']],
-                           answered=0)
+
+    if request.method == "POST":
+        settings = dict()
+        settings["topic"] = request.form["topic"]
+        settings["num_questions"] = int(request.form["num_questions"])
+        settings["difficulty"] = int(request.form["difficulty"])
+
+        session['settings'] = settings
+
+        session['quiz'] = db.get_questions(topic=settings['topic'], diff=settings['difficulty'],
+                                           num=settings['num_questions'])
+
+        if len(session['quiz']) == 0:
+            flash(f"No more {get_difficulty_string(settings['difficulty'])} questions left.")
+            return redirect(url_for("index"))
+
+        session['settings']['num_questions'] = len(session['quiz'])
+        return render_template("quiz_question.html", question=session['quiz'][session['q_index']],
+                               answered=0)
 
 
 @app.route("/question", methods=['POST', 'GET'])
@@ -128,6 +132,7 @@ def quiz_setup():
 def question():
     if request.method == 'GET':
         session['q_index'] += 1
+        # last question
         if len(session['quiz']) == session['q_index']:
             values = [(session['correct'], len(session['quiz'])), (10, 10), (4, 6), (1, 3)]
             results = session['settings']
@@ -136,29 +141,30 @@ def question():
             return render_template("show_quiz_result.html", result=values)
         return render_template("quiz_question.html", question=session['quiz'][session['q_index']],
                                answered=0)
-    else:
-        answer_index = request.form.get('answer')
-        question_asked = session['quiz'][session['q_index']]
-        answered = [question_asked['answered'][0] + 1, question_asked['answered'][1]]
-        if len(question_asked['answers']) > 1:
-            try:
-                answer_index = int(answer_index)
-                if answer_index == question_asked['correct_index']:
-                    session['correct'] += 1
-                else:
-                    answered[1] += 1
-            except ValueError:
-                return render_template("quiz_question.html",
-                                       question=session['quiz'][session['q_index']],
-                                       answered=0, error=1)
-        else:
-            if answer_index == question_asked['answers'][0]:
+
+    elif request.method == 'POST':
+        success = True
+        answer = request.form.get('answer')
+        current_question = session['quiz'][session['q_index']]
+        answered = [current_question['answered'][0] + 1, current_question['answered'][1]]
+        is_multiple_choice = len(current_question['answers']) > 1
+        if is_multiple_choice:
+            answer = int(answer)
+            if answer == current_question['correct_index']:
                 session['correct'] += 1
             else:
+                success = False
                 answered[1] += 1
-        db.set_question({'qid': question_asked['qid'], 'answered': answered})
-        return render_template("quiz_question.html", question=session['quiz'][session['q_index']],
-                               answered=1, answer_index=answer_index)
+
+        else:  # text-input question
+            if answer == current_question['answers'][0]:
+                session['correct'] += 1
+            else:
+                success = False
+                answered[1] += 1
+        db.set_question({'qid': current_question['qid'], 'answered': answered})
+        return render_template("quiz_question.html", question=current_question,
+                               show_answer=True, answer=answer, success=success)
 
 
 app.secret_key = 'secret example key'
