@@ -133,7 +133,7 @@ def quiz_setup():
             return redirect(url_for("index"))
 
         session['settings']['num_questions'] = len(session['quiz'])
-        return render_template("quiz_question.html", question=session['quiz'][session['q_index']],
+        return render_template("quiz_view.html", question=session['quiz'][session['q_index']],
                                answered=0)
 
 
@@ -149,7 +149,7 @@ def question():
             results['correct'] = session['correct']
             db.update_progress(session['user_id'], results)
             return render_template("show_quiz_result.html", result=values)
-        return render_template("quiz_question.html", question=session['quiz'][session['q_index']],
+        return render_template("quiz_view.html", question=session['quiz'][session['q_index']],
                                answered=0)
 
     elif request.method == 'POST':
@@ -173,7 +173,7 @@ def question():
                 success = False
                 answered[1] += 1
         db.set_question({'qid': current_question['qid'], 'answered': answered})
-        return render_template("quiz_question.html", question=current_question,
+        return render_template("quiz_view.html", question=current_question,
                                show_answer=True, answer=answer, success=success)
 
 
