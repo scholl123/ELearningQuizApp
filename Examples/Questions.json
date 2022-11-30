@@ -2,14 +2,14 @@
     {
         "qid": 1,
         "topic": "Machine Learning",
-        "question": "What is the scientific name of a butterfly?",
+        "question": "Among the following option identify the one which is not a type of learning",
         "answers": [
-            "Apis",
-            "Coleoptera",
-            "Formicqidae",
-            "Rhopalocera"
+            "Semi unsupervised learning",
+            "Supervised learning",
+            "Reinforcement learning",
+            "Unsupervised learning"
         ],
-        "correct_index": 3,
+        "correct_index": 0,
         "difficulty": 0,
         "answered": [
             100,
@@ -19,12 +19,12 @@
     {
         "qid": 2,
         "topic": "Machine Learning",
-        "question": "How hot is the surface of the sun?",
+        "question": "Identify the kind of learning algorithm for “facial identities for facial expressions”.",
         "answers": [
-            "1,233 K",
-            "5,778 K",
-            "12,130 K",
-            "101,300 K"
+            "Prediction",
+            "Recognition patterns",
+            "Recognizing anomalies",
+            "Generating patterns"
         ],
         "correct_index": 1,
         "difficulty": 1,
@@ -36,14 +36,14 @@
     {
         "qid": 3,
         "topic": "Machine Learning",
-        "question": "Who are the actors in The Internship?",
+        "question": "Identify the model which is trained with data in only a single batch.",
         "answers": [
-            "Ben Stiller, Jonah Hill",
-            "Courteney Cox, Matt LeBlanc",
-            "Kaley Cuoco, Jim Parsons",
-            "Vince Vaughn, Owen Wilson"
+            "Offline learning",
+            "Batch learning",
+            "Both A and B",
+            "None"
         ],
-        "correct_index": 3,
+        "correct_index": 2,
         "difficulty": 2,
         "answered": [
             940,
@@ -53,12 +53,12 @@
     {
         "qid": 4,
         "topic": "Machine Learning",
-        "question": "What is the capital of Spain?",
+        "question": "What is the application of machine learning methods to a large database called?",
         "answers": [
-            "Berlin",
-            "Buenos Aires",
-            "Madrqid",
-            "San Juan"
+            "Big data computing",
+            "Internet of things",
+            "Data mining",
+            "Artificial intelligence"
         ],
         "correct_index": 2,
         "difficulty": 0,
@@ -70,14 +70,14 @@
     {
         "qid": 5,
         "topic": "Machine Learning",
-        "question": "What are the school colors of the University of Texas at Austin?",
+        "question": "Identify the type of learning in which labeled training data is used.",
         "answers": [
-            "Black, Red",
-            "Blue, Orange",
-            "White, Burnt Orange",
-            "White, Old gold, Gold"
+            "Semi unsupervised learning",
+            "Supervised learning",
+            "Reinforcement learning",
+            "Unsupervised learning"
         ],
-        "correct_index": 2,
+        "correct_index": 1,
         "difficulty": 1,
         "answered": [
             1050,
@@ -87,14 +87,12 @@
     {
         "qid": 6,
         "topic": "Machine Learning",
-        "question": "What is 70 degrees Fahrenheit in Celsius?",
+        "question": "Identify whether true or false:  In PCA the number of input dimensions is equal to principal components.",
         "answers": [
-            "18.8889",
-            "20",
-            "21.1111",
-            "158"
+            "True",
+            "False"
         ],
-        "correct_index": 2,
+        "correct_index": 0,
         "difficulty": 2,
         "answered": [
             85,
@@ -159,15 +157,15 @@
     },
     {
         "qid": 11,
-        "topic": "French Vocabulary",
-        "question": "When was Mahatma Gandhi born?",
+        "topic": "Machine Learning",
+        "question": "Among the following identify the one in which dimensionality reduction reduces.",
         "answers": [
-            "October 2, 1869",
-            "December 15, 1872",
-            "July 18, 1918",
-            "January 15, 1929"
+            "Performance",
+            "Entropy",
+            "Stochastics",
+            "Collinearity"
         ],
-        "correct_index": 0,
+        "correct_index": 3,
         "difficulty": 1,
         "answered": [
             548,
@@ -176,15 +174,15 @@
     },
     {
         "qid": 12,
-        "topic": "French Vocabulary",
-        "question": "How far is the moon from Earth?",
+        "topic": "Machine Learning",
+        "question": "Which of the following machine learning algorithm is based upon the idea of bagging?",
         "answers": [
-            "7,918 miles (12,742 km)",
-            "86,881 miles (139,822 km)",
-            "238,400 miles (384,400 km)",
-            "35,980,000 miles (57,910,000 km)"
+            "Decision tree",
+            "Random-forest",
+            "Classification",
+            "Regression"
         ],
-        "correct_index": 2,
+        "correct_index": 1,
         "difficulty": 2,
         "answered": [
             10,
@@ -193,13 +191,13 @@
     },
     {
         "qid": 13,
-        "topic": "French Vocabulary",
-        "question": "What is 65 times 52?",
+        "topic": "Machine Learning",
+        "question": "Choose a disadvantage of decision trees among the following.",
         "answers": [
-            "117",
-            "3120",
-            "3380",
-            "3520"
+            "Decision trees are robust to outliers",
+            "Factor analysis",
+            "Decision trees are prone to overfit",
+            "All of the above"
         ],
         "correct_index": 2,
         "difficulty": 0,
@@ -210,15 +208,15 @@
     },
     {
         "qid": 14,
-        "topic": "French Vocabulary",
-        "question": "How tall is Mount Everest?",
+        "topic": "Machine Learning",
+        "question": "What is the term known as on which the machine learning algorithms build a model based on sample data?",
         "answers": [
-            "6,683 ft (2,037 m)",
-            "7,918 ft (2,413 m)",
-            "19,341 ft (5,895 m)",
-            "29,029 ft (8,847 m)"
+            "Data training",
+            "Training data",
+            "Transfer data",
+            "None of the above"
         ],
-        "correct_index": 3,
+        "correct_index": 1,
         "difficulty": 1,
         "answered": [
             45,
@@ -227,15 +225,15 @@
     },
     {
         "qid": 15,
-        "topic": "French Vocabulary",
-        "question": "When did The Avengers come out?",
+        "topic": "Machine Learning",
+        "question": "Machine learning is a subset of which of the following.",
         "answers": [
-            "May 2, 2008",
-            "May 4, 2012",
-            "May 3, 2013",
-            "April 4, 2014"
+            "Artificial intelligence",
+            "Deep learning",
+            "Data learning",
+            "None of the above"
         ],
-        "correct_index": 1,
+        "correct_index": 0,
         "difficulty": 2,
         "answered": [
             87,
@@ -244,15 +242,15 @@
     },
     {
         "qid": 16,
-        "topic": "French Vocabulary",
-        "question": "What is 48,879 in hexqidecimal?",
+        "topic": "Machine Learning",
+        "question": "Which of the following machine learning techniques helps in detecting the outliers in data?",
         "answers": [
-            "0x18C1",
-            "0xBEEF",
-            "0xDEAD",
-            "0x12D591"
+            "Classification",
+            "Clustering",
+            "Anomaly detection",
+            "All of the above"
         ],
-        "correct_index": 1,
+        "correct_index": 2,
         "difficulty": 0,
         "answered": [
             784,
@@ -261,10 +259,13 @@
     },
     {
         "qid": 17,
-        "topic": "French Vocabulary",
-        "question": "Which queen's actions contributed to the unrest that led to the French Revolution?",
+        "topic": "Machine Learning",
+        "question": "The father of machine learning is _____________",
         "answers": [
-            "Marie-Antoinette"
+            "Geoffrey Everest Hinton",
+            "Geoffrey Hill",
+            "Geoffrey Chaucer",
+            "None of the above"
         ],
         "correct_index": 0,
         "difficulty": 1,
@@ -275,12 +276,15 @@
     },
     {
         "qid": 18,
-        "topic": "French Vocabulary",
-        "question": "By 50 BCE, which famous historical figure had conquered the area today known as France?",
+        "topic": "Machine Learning",
+        "question": "The most significant phase in genetic algorithm is _________",
         "answers": [
-            "Julius Caesar"
+            "Mutation",
+            "Selection",
+            "Fitness function",
+            "Crossover"
         ],
-        "correct_index": 0,
+        "correct_index": 3,
         "difficulty": 2,
         "answered": [
             404,
@@ -289,12 +293,15 @@
     },
     {
         "qid": 19,
-        "topic": "French Vocabulary",
-        "question": "Which French landmark was designed to be taken down after 20 years?",
+        "topic": "Machine Learning",
+        "question": "Among the following options identify the one which is false regarding regression.",
         "answers": [
-            "Eiffel Tower"
+            "It is used for the prediction",
+            "It is used for  interpretation",
+            "It relates inputs to outputs",
+            "It discovers casual relationships"
         ],
-        "correct_index": 0,
+        "correct_index": 3,
         "difficulty": 0,
         "answered": [
             420,
@@ -303,16 +310,184 @@
     },
     {
         "qid": 20,
-        "topic": "French Vocabulary",
-        "question": "what is the national motto of France?",
+        "topic": "Machine Learning",
+        "question": "Which of the following are common classes of problems in machine learning?",
         "answers": [
-            "Liberty, equality, fraternity"
+            "Regression",
+            "Classification",
+            "Clustering",
+            "All of the above"
         ],
-        "correct_index": 0,
+        "correct_index": 3,
         "difficulty": 1,
         "answered": [
             1337,
             137
+        ]
+    },
+    {
+        "qid": 21,
+        "topic": "Machine Learning",
+        "question": "Identify the successful applications of ML.",
+        "answers": [
+            "Learning to classify new astronomical structures",
+            "Learning to recognize spoken words",
+            "Learning to drive an autonomous vehicle",
+            "All of the above"
+        ],
+        "correct_index": 3,
+        "difficulty": 1,
+        "answered": [
+            103,
+            1
+        ]
+    },
+    {
+        "qid": 22,
+        "topic": "Machine Learning",
+        "question": "Identify the incorrect numerical functions in the various function representation of machine learning.",
+        "answers": [
+            "Case-based",
+            "Support vector machines",
+            "Linear regression",
+            "Neural network"
+        ],
+        "correct_index": 0,
+        "difficulty": 1,
+        "answered": [
+            17,
+            13
+        ]
+    },
+    {
+        "qid": 23,
+        "topic": "Machine Learning",
+        "question": "FIND-S algorithm ignores?",
+        "answers": [
+            "Positive",
+            "Negative",
+            "Both",
+            "None"
+        ],
+        "correct_index": 1,
+        "difficulty": 1,
+        "answered": [
+            437,
+            42
+        ]
+    },
+    {
+        "qid": 24,
+        "topic": "Machine Learning",
+        "question": "Select the correct definition of neuro software.",
+        "answers": [
+            "It is software used by neurosurgeons",
+            "It is software used to analyze neurons",
+            "It is a powerful and easy neural network",
+            "None of the above"
+        ],
+        "correct_index": 2,
+        "difficulty": 1,
+        "answered": [
+            415,
+            137
+        ]
+    },
+    {
+        "qid": 25,
+        "topic": "Machine Learning",
+        "question": "Choose whether the following statement is true or false: The backpropagation law is also known as the generalized Delta rule.",
+        "answers": [
+            "True",
+            "False"
+        ],
+        "correct_index": 0,
+        "difficulty": 1,
+        "answered": [
+            721,
+            710
+        ]
+    },
+    {
+        "qid": 26,
+        "topic": "Machine Learning",
+        "question": "Choose the general limitations of the backpropagation rule among the following.",
+        "answers": [
+            "Slow convergence",
+            "Scaling",
+            "Local minima problem",
+            "All of the above"
+        ],
+        "correct_index": 3,
+        "difficulty": 1,
+        "answered": [
+            337,
+            137
+        ]
+    },
+    {
+        "qid": 27,
+        "topic": "Machine Learning",
+        "question": "Analysis of ML algorithm needs:",
+        "answers": [
+            "Statistical learning theory",
+            "Computational learning theory",
+            "Both A and B",
+            "None of the above"
+        ],
+        "correct_index": 2,
+        "difficulty": 1,
+        "answered": [
+            2337,
+            137
+        ]
+    },
+    {
+        "qid": 28,
+        "topic": "Machine Learning",
+        "question": "Choose the most widely used mattress and tools to assess the classification models.",
+        "answers": [
+            "The area under the ROC curve",
+            "Confusion matrix",
+            "Cost-sensitive accuracy",
+            "All of the above"
+        ],
+        "correct_index": 3,
+        "difficulty": 1,
+        "answered": [
+            137,
+            17
+        ]
+    },
+    {
+        "qid": 29,
+        "topic": "Machine Learning",
+        "question": "Full form of PAC is",
+        "answers": [
+            "Probably Approximate Correct"
+        ],
+        "correct_index": 0,
+        "difficulty": 1,
+        "answered": [
+            337,
+            23
+        ]
+    },
+    {
+        "qid": 30,
+        "topic": "Machine Learning",
+        "question": "Choose the options below of which the area CLT is comprised of.",
+        "answers": [
+            "Mistake bound",
+            "Sample complexity",
+            "Computational complexity",
+            "All of the above"
+        ],
+        "correct_index": 3,
+        "difficulty": 1,
+        "answered": [
+            133,
+            13
         ]
     }
 ]

@@ -167,7 +167,7 @@ def question():
                 answered[1] += 1
 
         else:  # text-input question
-            if answer == current_question['answers'][0]:
+            if answer.lower() == current_question['answers'][0].lower():
                 session['correct'] += 1
             else:
                 success = False
