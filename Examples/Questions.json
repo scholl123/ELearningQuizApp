@@ -19,7 +19,7 @@
     {
         "qid": 2,
         "topic": "Machine Learning",
-        "question": "Identify the kind of learning algorithm for “facial identities for facial expressions”.",
+        "question": "Identify the kind of learning algorithm for 'facial identities for facial expressions'.",
         "answers": [
             "Prediction",
             "Recognition patterns",
@@ -488,6 +488,475 @@
         "answered": [
             133,
             13
+        ]
+    },
+    {
+        "qid": 31,
+        "topic": "LatinVocabulary",
+        "question": "amor",
+        "answers": [
+            "Love"
+        ],
+        "correct_index": 0,
+        "difficulty": 0,
+        "answered": [
+            0,
+            0
+        ]
+    },
+    {
+        "qid": 32,
+        "topic": "LatinVocabulary",
+        "question": "animus",
+        "answers": [
+            "Animal",
+            "Friend",
+            "Soul"
+        ],
+        "correct_index": 2,
+        "difficulty": 0,
+        "answered": [
+            0,
+            0
+        ]
+    },
+    {
+        "qid": 33,
+        "topic": "LatinVocabulary",
+        "question": "brevis",
+        "answers": [
+            "long",
+            "friendly",
+            "short",
+            "proper"
+        ],
+        "correct_index": 2,
+        "difficulty": 0,
+        "answered": [
+            0,
+            0
+        ]
+    },
+    {
+        "qid": 34,
+        "topic": "LatinVocabulary",
+        "question": "hodiernus",
+        "answers": [
+            "of today",
+            "of tomorrow",
+            "this week",
+            "yesterday"
+        ],
+        "correct_index": 0,
+        "difficulty": 0,
+        "answered": [
+            0,
+            0
+        ]
+    },
+    {
+        "qid": 35,
+        "topic": "LatinVocabulary",
+        "question": "immortalis",
+        "answers": [
+            "immortal"
+        ],
+        "correct_index": 0,
+        "difficulty": 0,
+        "answered": [
+            0,
+            0
+        ]
+    },
+    {
+        "qid": 36,
+        "topic": "LatinVocabulary",
+        "question": "discipulus",
+        "answers": [
+            "student"
+        ],
+        "correct_index": 0,
+        "difficulty": 0,
+        "answered": [
+            0,
+            0
+        ]
+    },
+    {
+        "qid": 37,
+        "topic": "LatinVocabulary",
+        "question": "discere",
+        "answers": [
+            "to learn",
+            "to teach",
+            "to write",
+            "to say"
+        ],
+        "correct_index": 0,
+        "difficulty": 0,
+        "answered": [
+            0,
+            0
+        ]
+    },
+    {
+        "qid": 38,
+        "topic": "LatinVocabulary",
+        "question": "docere",
+        "answers": [
+            "to learn",
+            "to teach",
+            "to write",
+            "to say"
+        ],
+        "correct_index": 1,
+        "difficulty": 0,
+        "answered": [
+            0,
+            0
+        ]
+    },
+    {
+        "qid": 39,
+        "topic": "LatinVocabulary",
+        "question": "cogitare",
+        "answers": [
+            "to think",
+            "to say",
+            "to force someone",
+            "to run"
+        ],
+        "correct_index": 0,
+        "difficulty": 0,
+        "answered": [
+            0,
+            0
+        ]
+    },
+    {
+        "qid": 40,
+        "topic": "LatinVocabulary",
+        "question": "ars",
+        "answers": [
+            "art"
+        ],
+        "correct_index": 0,
+        "difficulty": 0,
+        "answered": [
+            0,
+            0
+        ]
+    },
+    {
+        "qid": 41,
+        "topic": "LatinVocabulary",
+        "question": "corpus",
+        "answers": [
+            "body"
+        ],
+        "correct_index": 0,
+        "difficulty": 1,
+        "answered": [
+            0,
+            0
+        ]
+    },
+    {
+        "qid": 42,
+        "topic": "LatinVocabulary",
+        "question": "cum",
+        "answers": [
+            "next to",
+            "with",
+            "before",
+            "at last"
+        ],
+        "correct_index": 1,
+        "difficulty": 1,
+        "answered": [
+            0,
+            0
+        ]
+    },
+    {
+        "qid": 43,
+        "topic": "LatinVocabulary",
+        "question": "diu",
+        "answers": [
+            "long"
+        ],
+        "correct_index": 0,
+        "difficulty": 1,
+        "answered": [
+            0,
+            0
+        ]
+    },
+    {
+        "qid": 44,
+        "topic": "LatinVocabulary",
+        "question": "sumere",
+        "answers": [
+            "to write",
+            "to take",
+            "to summon",
+            "to jump"
+        ],
+        "correct_index": 1,
+        "difficulty": 1,
+        "answered": [
+            0,
+            0
+        ]
+    },
+    {
+        "qid": 45,
+        "topic": "LatinVocabulary",
+        "question": "fama",
+        "answers": [
+            "Gossip",
+            "Hunger",
+            "far away",
+            "before"
+        ],
+        "correct_index": 0,
+        "difficulty": 1,
+        "answered": [
+            0,
+            0
+        ]
+    },
+    {
+        "qid": 46,
+        "topic": "LatinVocabulary",
+        "question": "ferrum",
+        "answers": [
+            "Boat",
+            "Iron, Sword",
+            "Anvil",
+            "with great Force"
+        ],
+        "correct_index": 1,
+        "difficulty": 1,
+        "answered": [
+            0,
+            0
+        ]
+    },
+    {
+        "qid": 47,
+        "topic": "LatinVocabulary",
+        "question": "ingenium",
+        "answers": [
+            "trick, clever device",
+            "great spirit",
+            "proper, fitting",
+            "prudent"
+        ],
+        "correct_index": 0,
+        "difficulty": 1,
+        "answered": [
+            0,
+            0
+        ]
+    },
+    {
+        "qid": 48,
+        "topic": "LatinVocabulary",
+        "question": "quoque",
+        "answers": [
+            "too"
+        ],
+        "correct_index": 0,
+        "difficulty": 1,
+        "answered": [
+            0,
+            0
+        ]
+    },
+    {
+        "qid": 49,
+        "topic": "LatinVocabulary",
+        "question": "campana",
+        "answers": [
+            "bell"
+        ],
+        "correct_index": 0,
+        "difficulty": 1,
+        "answered": [
+            0,
+            0
+        ]
+    },
+    {
+        "qid": 50,
+        "topic": "LatinVocabulary",
+        "question": "carmen",
+        "answers": [
+            "singer",
+            "dancer",
+            "goddess",
+            "poem"
+        ],
+        "correct_index": 3,
+        "difficulty": 1,
+        "answered": [
+            0,
+            0
+        ]
+    },
+    {
+        "qid": 51,
+        "topic": "LatinVocabulary",
+        "question": "qui, quae, quod",
+        "answers": [
+            "who, what, because"
+        ],
+        "correct_index": 0,
+        "difficulty": 2,
+        "answered": [
+            0,
+            0
+        ]
+    },
+    {
+        "qid": 52,
+        "topic": "LatinVocabulary",
+        "question": "si",
+        "answers": [
+            "if"
+        ],
+        "correct_index": 0,
+        "difficulty": 2,
+        "answered": [
+            0,
+            0
+        ]
+    },
+    {
+        "qid": 53,
+        "topic": "LatinVocabulary",
+        "question": "quisquis",
+        "answers": [
+            "whoever",
+            "whichsoever",
+            "whom",
+            "whatever"
+        ],
+        "correct_index": 0,
+        "difficulty": 2,
+        "answered": [
+            0,
+            0
+        ]
+    },
+    {
+        "qid": 54,
+        "topic": "LatinVocabulary",
+        "question": "quidem",
+        "answers": [
+            "whoever",
+            "therefore",
+            "indeed",
+            "how"
+        ],
+        "correct_index": 2,
+        "difficulty": 2,
+        "answered": [
+            0,
+            0
+        ]
+    },
+    {
+        "qid": 55,
+        "topic": "LatinVocabulary",
+        "question": "accidere",
+        "answers": [
+            "to kill",
+            "to happen",
+            "to look after",
+            "to hit"
+        ],
+        "correct_index": 1,
+        "difficulty": 2,
+        "answered": [
+            0,
+            0
+        ]
+    },
+    {
+        "qid": 56,
+        "topic": "LatinVocabulary",
+        "question": "ferre",
+        "answers": [
+            "to strike out of, to shake off",
+            "to leave behind",
+            "to look after, to care for",
+            "to carry, to endure"
+        ],
+        "correct_index": 3,
+        "difficulty": 2,
+        "answered": [
+            0,
+            0
+        ]
+    },
+    {
+        "qid": 57,
+        "topic": "LatinVocabulary",
+        "question": "que",
+        "answers": [
+            "and"
+        ],
+        "correct_index": 0,
+        "difficulty": 2,
+        "answered": [
+            0,
+            0
+        ]
+    },
+    {
+        "qid": 58,
+        "topic": "LatinVocabulary",
+        "question": "nolle",
+        "answers": [
+            "to justify, to give reasons",
+            "to not wish, to not be willing",
+            "to persuade"
+        ],
+        "correct_index": 1,
+        "difficulty": 2,
+        "answered": [
+            0,
+            0
+        ]
+    },
+    {
+        "qid": 59,
+        "topic": "LatinVocabulary",
+        "question": "loquor",
+        "answers": [
+            "to speak"
+        ],
+        "correct_index": 0,
+        "difficulty": 2,
+        "answered": [
+            0,
+            0
+        ]
+    },
+    {
+        "qid": 60,
+        "topic": "LatinVocabulary",
+        "question": "quies",
+        "answers": [
+            "rest"
+        ],
+        "correct_index": 0,
+        "difficulty": 2,
+        "answered": [
+            0,
+            0
         ]
     }
 ]
