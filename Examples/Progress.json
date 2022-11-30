@@ -3,7 +3,7 @@
     "Machine Learning": [{"timestamp": 0, "num_questions": 20, "correct": 14},
         {"timestamp": 1, "num_questions": 10, "correct": 10},
         {"timestamp": 2, "num_questions": 200, "correct": 104}],
-    "French Vocabulary": [{"timestamp": 0, "num_questions": 100, "correct": 20},
+    "LatinVocabulary": [{"timestamp": 0, "num_questions": 100, "correct": 20},
         {"timestamp": 1, "num_questions": 50, "correct": 4}],
     "badges": [
         {
@@ -17,7 +17,7 @@
 },
 {
     "uid": 2,
-    "French Vocabulary": [{"timestamp": 0, "num_questions": 100, "correct": 20}],
+    "LatinVocabulary": [{"timestamp": 0, "num_questions": 100, "correct": 20}],
     "badges": [
         {
 			"bid": 3, 
