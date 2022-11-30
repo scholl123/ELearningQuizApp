@@ -27,7 +27,7 @@
             "Generating patterns"
         ],
         "correct_index": 1,
-        "difficulty": 1,
+        "difficulty": 0,
         "answered": [
             135,
             2
@@ -44,7 +44,7 @@
             "None"
         ],
         "correct_index": 2,
-        "difficulty": 2,
+        "difficulty": 0,
         "answered": [
             940,
             120
@@ -78,7 +78,7 @@
             "Unsupervised learning"
         ],
         "correct_index": 1,
-        "difficulty": 1,
+        "difficulty": 0,
         "answered": [
             1050,
             240
@@ -93,7 +93,7 @@
             "False"
         ],
         "correct_index": 0,
-        "difficulty": 2,
+        "difficulty": 0,
         "answered": [
             85,
             82
@@ -121,7 +121,7 @@
             "graphical user interface"
         ],
         "correct_index": 0,
-        "difficulty": 1,
+        "difficulty": 0,
         "answered": [
             423,
             120
@@ -135,7 +135,7 @@
             "application programming interface"
         ],
         "correct_index": 0,
-        "difficulty": 2,
+        "difficulty": 0,
         "answered": [
             756,
             50
@@ -183,7 +183,7 @@
             "Regression"
         ],
         "correct_index": 1,
-        "difficulty": 2,
+        "difficulty": 1,
         "answered": [
             10,
             7
@@ -200,7 +200,7 @@
             "All of the above"
         ],
         "correct_index": 2,
-        "difficulty": 0,
+        "difficulty": 1,
         "answered": [
             100,
             87
@@ -234,7 +234,7 @@
             "None of the above"
         ],
         "correct_index": 0,
-        "difficulty": 2,
+        "difficulty": 1,
         "answered": [
             87,
             63
@@ -251,7 +251,7 @@
             "All of the above"
         ],
         "correct_index": 2,
-        "difficulty": 0,
+        "difficulty": 1,
         "answered": [
             784,
             54
@@ -285,7 +285,7 @@
             "Crossover"
         ],
         "correct_index": 3,
-        "difficulty": 2,
+        "difficulty": 1,
         "answered": [
             404,
             202
@@ -302,7 +302,7 @@
             "It discovers casual relationships"
         ],
         "correct_index": 3,
-        "difficulty": 0,
+        "difficulty": 1,
         "answered": [
             420,
             45
@@ -336,7 +336,7 @@
             "All of the above"
         ],
         "correct_index": 3,
-        "difficulty": 1,
+        "difficulty": 2,
         "answered": [
             103,
             1
@@ -353,7 +353,7 @@
             "Neural network"
         ],
         "correct_index": 0,
-        "difficulty": 1,
+        "difficulty": 2,
         "answered": [
             17,
             13
@@ -370,7 +370,7 @@
             "None"
         ],
         "correct_index": 1,
-        "difficulty": 1,
+        "difficulty": 2,
         "answered": [
             437,
             42
@@ -387,7 +387,7 @@
             "None of the above"
         ],
         "correct_index": 2,
-        "difficulty": 1,
+        "difficulty": 2,
         "answered": [
             415,
             137
@@ -402,7 +402,7 @@
             "False"
         ],
         "correct_index": 0,
-        "difficulty": 1,
+        "difficulty": 2,
         "answered": [
             721,
             710
@@ -419,7 +419,7 @@
             "All of the above"
         ],
         "correct_index": 3,
-        "difficulty": 1,
+        "difficulty": 2,
         "answered": [
             337,
             137
@@ -436,7 +436,7 @@
             "None of the above"
         ],
         "correct_index": 2,
-        "difficulty": 1,
+        "difficulty": 2,
         "answered": [
             2337,
             137
@@ -453,7 +453,7 @@
             "All of the above"
         ],
         "correct_index": 3,
-        "difficulty": 1,
+        "difficulty": 2,
         "answered": [
             137,
             17
@@ -467,7 +467,7 @@
             "Probably Approximate Correct"
         ],
         "correct_index": 0,
-        "difficulty": 1,
+        "difficulty": 2,
         "answered": [
             337,
             23
@@ -484,7 +484,7 @@
             "All of the above"
         ],
         "correct_index": 3,
-        "difficulty": 1,
+        "difficulty": 2,
         "answered": [
             133,
             13
