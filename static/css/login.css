@@ -1,14 +1,23 @@
+body {
+    background: #e2e2e2 url("/static/images/low-poly-grid-haikei.svg") no-repeat;
+    background-size: cover;
+    animation: pan 6s infinite alternate linear;
+}
+
 .back {
-    background: #e2e2e2;
     width: 100%;
     position: absolute;
     top: 0;
     bottom: 0;
 }
 
-.div-center {
-    width: 400px;
-    height: 400px;
+
+
+.login-card {
+    place-items: center;
+    text-align: center;
+    width: 300px;
+    height: 350px;
     background-color: #fff;
     position: absolute;
     left: 0;
@@ -22,9 +31,22 @@
     padding: 1em 2em;
     border-bottom: 2px solid #ccc;
     display: table;
+    border-radius: 25px;
 }
 
-div.content {
-    display: table-cell;
-    vertical-align: middle;
+.login-card > h3 {
+    margin: 12px 0 12px;
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.login-card > h4 {
+    margin: 0 0 20px;
+    font-size: 16px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.38);
+}
+
+input.btn {
+    margin-top: 5px
 }

@@ -78,8 +78,6 @@ def show_single_topic():
             quest["difficulty"] = difficulty_levels[quest["difficulty"]]
                 
         return render_template("show_one_topic.html", topic=text, questions=questions)
-        
-
 
 
 @app.route("/upload_new_topic")
@@ -133,8 +131,7 @@ def quiz_setup():
             return redirect(url_for("index"))
 
         session['settings']['num_questions'] = len(session['quiz'])
-        return render_template("quiz_view.html", question=session['quiz'][session['q_index']],
-                               answered=0)
+        return render_template("quiz_view.html", question=session['quiz'][session['q_index']])
 
 
 @app.route("/question", methods=['POST', 'GET'])
@@ -149,8 +146,7 @@ def question():
             results['correct'] = session['correct']
             db.update_progress(session['user_id'], results)
             return render_template("show_quiz_result.html", result=values)
-        return render_template("quiz_view.html", question=session['quiz'][session['q_index']],
-                               answered=0)
+        return render_template("quiz_view.html", question=session['quiz'][session['q_index']])
 
     elif request.method == 'POST':
         success = True
