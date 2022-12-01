@@ -2,6 +2,10 @@ body {
 
 }
 
+#answer {
+    margin-bottom: 20px;
+}
+
 #submit{
     background-color: steelblue;
 }
@@ -43,8 +47,6 @@ label.btn-block {
     text-align: left;
     position: relative
 }
-
-
 
 label .glyphicon {
     top: 34%
@@ -140,23 +142,10 @@ label .glyphicon {
     }
 }
 
-.
-
-
-
-
-
-
 -header {
     background-color: transparent;
     color: inherit
 }
-
-.
-
-
-
-
 
 .-body {
     min-height: 300px
