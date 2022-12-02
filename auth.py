@@ -67,7 +67,7 @@ def load_logged_in_user():
     """checks if a user id is stored in the session and gets that user's data from database, storing it in g.user"""
     user_id = session.get('user_id')
     db = Database()
-    user_id = 0
+    # user_id = 0
     if user_id == 0:
         g.user = {
             "uid": 0,
