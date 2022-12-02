@@ -17,7 +17,7 @@ Upload a new Topic for your Quizzes!
             </h4>
             {% elif success == 2 %}
             <h4>Upload was not successful! Your are only allowed to upload file types xlsx. <a href={{
-                    url_for('upload_new_topic') }}>Try again:</a>
+                    url_for('show_upload_page') }}> Try again:</a>
             </h4>
             {% else %}
             <h4>Upload was not successful</a>
