@@ -34,7 +34,6 @@ def show_progress():
     uid = g.user['uid']
     user_progress_data = db.get_progress(uid)
     badges = []
-    print(uid)
 
     for b in user_progress_data["badges"]:
         count = b["count"] if b["count"] != -1 else 0
@@ -185,6 +184,5 @@ if __name__ == '__main__':
     import auth
 
     app.register_blueprint(auth.auth)
-    print("hello")
     # session.init_app(app)
     app.run(debug=True)
