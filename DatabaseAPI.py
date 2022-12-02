@@ -144,15 +144,15 @@ class Database:
 
     def update_progress(self, uid: int, quiz_results: dict) -> int:
         """Updates user progress after completing a quiz."""
-        # TODO: update badges
         p_dict = self.get_progress(uid)
         try:
             topic = quiz_results['topic']
             num_questions = quiz_results['num_questions']
             correct = quiz_results['correct']
+            difficulty = quiz_results['difficulty']
         except KeyError:
             raise KeyError('Quiz results information are missing! '
-                           'Requires: topic, num_questions, correct')
+                           'Requires: topic, num_questions, correct, difficulty')
         if topic in p_dict.keys():
             topic_list = p_dict[topic]
             topic_list.append({'timestamp': len(topic_list), 'num_questions': num_questions,
@@ -160,6 +160,43 @@ class Database:
         else:
             topic_list = [{'timestamp': 0, 'num_questions': num_questions, 'correct': correct}]
         p_dict[topic] = topic_list
+
+        # badge update
+        badges = self.get_badges()
+        targets = {}
+        for b in badges:
+            targets[b['bid']] = b['target']
+        try:
+            user_badges = p_dict['badges']
+        except KeyError:
+            user_badges = []
+        badge_ids = [2]
+        if difficulty == 0:
+            badge_ids += [3, 4]
+        elif difficulty == 1:
+            badge_ids += [5, 6]
+        else:
+            badge_ids += [7, 8]
+
+        if len(user_badges):
+            for b in user_badges:
+                if b['bid'] in badge_ids:
+                    if b['bid'] == 2:
+                        b['count'] += 1
+                    else:
+                        b['count'] += correct
+                        if b['count'] > targets[b['bid']]:
+                            b['count'] = targets[b['bid']]
+                    badge_ids.remove(b['bid'])
+        else:
+            user_badges = [{'bid': 1, 'count': -1}]
+        for bid in badge_ids:
+            if bid == 2:
+                user_badges.append({'bid': bid, 'count': 1})
+            else:
+                user_badges.append({'bid': bid, 'count': correct})
+        p_dict['badges'] = user_badges
+
         self.set_progress(p_dict)
         return 0
 

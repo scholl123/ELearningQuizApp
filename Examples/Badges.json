@@ -5,16 +5,36 @@
 },
 {
     "bid": 2,
-    "name": "More than 100 Questions on Easy",
+    "name": "Finished 100 Quizzes",
     "target": 100
 },
 {
     "bid": 3,
-    "name": "All Questions of a Topic on Easy",
-    "target": 500
+    "name": "Solved 50 Questions on Easy",
+    "target": 50
 },
 {
     "bid": 4,
-    "name": "Less than 10% of Questions currently on Hard",
-    "target": 10
+    "name": "Solved 100 Questions on Easy",
+    "target": 100
+},
+{
+    "bid": 5,
+    "name": "Solved 50 Questions on Medium",
+    "target": 50
+},
+{
+    "bid": 6,
+    "name": "Solved 100 Questions on Medium",
+    "target": 100
+},
+{
+    "bid": 7,
+    "name": "Solved 50 Questions on Hard",
+    "target": 50
+},
+{
+    "bid": 8,
+    "name": "Solved 100 Questions on Hard",
+    "target": 100
 }]
