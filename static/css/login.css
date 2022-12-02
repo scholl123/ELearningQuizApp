@@ -1,8 +1,8 @@
-body {
+ body {
     background: #e2e2e2 url("/static/images/low-poly-grid-haikei.svg") no-repeat;
     background-size: cover;
     animation: pan 6s infinite alternate linear;
-}
+} 
 
 .back {
     width: 100%;
