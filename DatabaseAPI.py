@@ -75,6 +75,8 @@ class Database:
             key = q_dict['qid']
             answered = q_dict['answered'][0]
             false = q_dict['answered'][1]
+            # evaluate question difficulty... right now it's very basic
+            # < 1/3: hard, < 2/3 medium, > 2/3 easy
             q_dict['difficulty'] = int(false * 100 / answered) // 33
         except KeyError:
             key = self.db.Questions.find().sort('qid', -1).limit(1)[0]['qid'] + 1  # get last index
