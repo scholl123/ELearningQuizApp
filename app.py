@@ -36,7 +36,7 @@ def show_progress():
     badges = []
 
     for b in user_progress_data["badges"]:
-        count = b["count"] if b["count"] != -1 else 0
+        count = b["count"] if b["count"] != -1 else 1
         badge_info = db.get_badges(b["bid"])
         obtained = b["count"] == badge_info["target"]
         if badge_info["target"] == -1:
