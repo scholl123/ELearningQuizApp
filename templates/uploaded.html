@@ -1,19 +1,16 @@
 {% extends "base.html" %}
 
 {% block info %}
-Upload a new Topic for your Quizzes!
+Upload a new Quiz!
 {% endblock info %}
 
 {%set success = notice%}
 {% block main %}
 <div class="container-fluid">
     <div class="row">
-        <div class="col-xs-12">
-            <h1> Upload a new Topic:</h1>
-        </div>
         <div class="center">
             {% if success == 1 %}
-            <h4>Upload was successful! You can view your new Topic <a href={{ url_for('show_all_topics') }}>here.</a>
+            <h4>Upload was successful! You can view your new Quiz <a href={{ url_for('show_all_topics') }}>here.</a>
             </h4>
             {% elif success == 2 %}
             <h4>Upload was not successful! Your are only allowed to upload file types xlsx. <a href={{

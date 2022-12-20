@@ -66,6 +66,7 @@ def login():
 def load_logged_in_user():
     """checks if a user id is stored in the session and gets that user's data from database, storing it in g.user"""
     user_id = session.get('user_id')
+    print(session)
     db = Database()
     # user_id = 0
     if user_id == 0:
@@ -79,6 +80,7 @@ def load_logged_in_user():
         return
 
     if user_id is None:
+        print('Why?')
         g.user = None
     else:
         g.user = db.get_user_by_id(user_id)

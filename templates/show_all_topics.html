@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block info %}
-See all Topics you've uploaded and check out their Questions!
+See all Quizzes and check out their Questions!
 {% endblock %}
 
 {%set all_topics = topics%}
@@ -11,7 +11,7 @@ See all Topics you've uploaded and check out their Questions!
 
     <div class="row">
         <div class="col-xs-12">
-            <h1> Uploaded Topics:</h1>
+            <h1> Uploaded Quizzes:</h1>
         </div>
 
         <div class=" justify-content-center>">
@@ -19,7 +19,7 @@ See all Topics you've uploaded and check out their Questions!
                 <table class="table-striped mx-auto w-auto" , style="width:100%">
                     <thead>
                         <tr>
-                            <th>Topic Name</th>
+                            <th>Quiz Name</th>
                             <th>Number of Questions</th>
                             <th>Percentage of Easy Questions</th>
                             <th>Percentage of Medium Questions</th>

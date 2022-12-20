@@ -46,6 +46,8 @@ class Database:
                 raise Exception(f'Cannot add new user. Missing keys: {missing_keys}')
             u_dict['pw'] = md5(u_dict['pw'].encode()).hexdigest()
         self.db.User.update_one({'uid': key}, {'$set': u_dict}, upsert=True)
+        if self.db.Progress.find_one({'uid': key}) is None:
+            self.db.Progress.insert_one({'uid': key, 'badges': []})
         return key
 
     def get_questions(self, topic: str = None, num: int = 0,

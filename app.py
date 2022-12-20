@@ -22,16 +22,26 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 @app.route("/", methods=['GET', 'POST'])
 def index():
     """root directory of the web interface. Login interface"""
-    if g.user is None:
-        return redirect(url_for('auth.login'))
+    # if g.user is None:
+    #     return redirect(url_for('auth.login'))
     topics = db.get_topics()
+    if request.args.get('user_id') is not None:
+        session.clear()
+        g.user = {
+            "uid": request.args.get('user_id'),
+            "fname": request.args.get('fname'),
+            "lname": request.args.get('lname')
+        }
+        session['user_id'] = g.user['uid']
+    if db.get_user_by_id(session['user_id']) is None:
+        db.set_user(g.user)
     return render_template("quiz_settings.html", topics=topics)
 
 
 @app.route("/progress")
 @auth.login_required
 def show_progress():
-    uid = g.user['uid']
+    uid = session['user_id']
     user_progress_data = db.get_progress(uid)
     badges = []
 
@@ -46,7 +56,10 @@ def show_progress():
 
     data = db.get_user_statistics(uid)
     palette = (sns.color_palette("colorblind", len(data.keys()))).as_hex()
-    labels = [i for i in range(0, max(len(x) for x in list(data.values())))]
+    try:
+        labels = [i for i in range(0, max(len(x) for x in list(data.values())))]
+    except ValueError:
+        labels = []
     data_dict = dict()
     for key in data.keys():
         data_dict["'" + key + "'"] = (data[key], "'" + str(palette.pop()) + "'")
@@ -99,7 +112,7 @@ def show_uploaded_page():
 
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             x = file_handling.transform_input_file_to_topic(file.filename,
-                                                            topic=request.form.get("topic_name"),
+                                                            topic=request.form.get("topic"),
                                                             file=file)
             [db.set_question(q) for q in x]
             return render_template("uploaded.html", notice=1)
@@ -110,7 +123,7 @@ def show_uploaded_page():
 
 
 @app.route("/quiz", methods=['POST', 'GET'])
-@auth.login_required
+# @auth.login_required
 def quiz_setup():
     session['q_index'] = 0
     session['correct'] = 0
@@ -118,17 +131,20 @@ def quiz_setup():
     if request.method == "POST":
         settings = dict()
         settings["topic"] = request.form["topic"]
-        settings["num_questions"] = int(request.form["num_questions"])
-        settings["difficulty"] = int(request.form["difficulty"])
+        # settings["num_questions"] = int(request.form["num_questions"])
+        # settings["difficulty"] = int(request.form["difficulty"])
 
         session['settings'] = settings
 
-        session['quiz'] = db.get_questions(topic=settings['topic'], diff=settings['difficulty'],
-                                           num=settings['num_questions'])
+        # session['quiz'] = db.get_questions(topic=settings['topic'], diff=settings['difficulty'],
+        #                                    num=settings['num_questions'])
+        session['quiz'] = db.get_questions(topic=settings['topic'])
+        session['settings']['num_questions'] = len(session['quiz'])
+        session['settings']['difficulty'] = len(session['quiz'])
 
-        if len(session['quiz']) == 0:
-            flash(f"No more {get_difficulty_string(settings['difficulty'])} questions left.")
-            return redirect(url_for("index"))
+        # if len(session['quiz']) == 0:
+        #     flash(f"No more {get_difficulty_string(settings['difficulty'])} questions left.")
+        #     return redirect(url_for("index"))
 
         session['settings']['num_questions'] = len(session['quiz'])
         return render_template("quiz_view.html", question=session['quiz'][session['q_index']])
@@ -144,6 +160,7 @@ def question():
             values = [(session['correct'], len(session['quiz'])), (10, 10), (4, 6), (1, 3)]
             results = session['settings']
             results['correct'] = session['correct']
+            print(session)
             db.update_progress(session['user_id'], results)
             return render_template("show_quiz_result.html", result=values)
         return render_template("quiz_view.html", question=session['quiz'][session['q_index']])
@@ -155,7 +172,8 @@ def question():
         answered = [current_question['answered'][0] + 1, current_question['answered'][1]]
         is_multiple_choice = len(current_question['answers']) > 1
         if is_multiple_choice:
-            answer = int(answer)
+            if answer is not None:
+                answer = int(answer)
             if answer == current_question['correct_index']:
                 session['correct'] += 1
             else:
